@@ -23,7 +23,7 @@
         - In a future lecture, we’ll talk about how to test Android UI using Espresso.
         - For now, ensure that you’re writing good unit tests for anything unit-testable in your code.
     * Screenshots
-        - ![image description](screenshots/path_to_screenshot_file.png)
+        - ![Home Page](screenshots/home-page.jpeg)
         - ![image description](screenshots/path_to_screenshot_file.png)
         - ![image description](screenshots/path_to_screenshot_file.png)
 
