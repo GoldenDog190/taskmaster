@@ -21,5 +21,6 @@
         - In a future lecture, we’ll talk about how to test Android UI using Espresso.
         - For now, ensure that you’re writing good unit tests for anything unit-testable in your code.
     * Screenshots
-        - 
+        -
+        -
 
