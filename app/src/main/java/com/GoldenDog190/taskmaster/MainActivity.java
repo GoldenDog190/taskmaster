@@ -32,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
             Intent allTaskButtonIntent = new Intent(MainActivity.this, AllTasks.class);
             startActivity(allTaskButtonIntent);
         });
+
+        Button settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(view -> {
+            Intent settingsButtonIntent  = new Intent(MainActivity.this, Settings.class);
+            startActivity(settingsButtonIntent);
+        });
+
+        Button taskDetailsButton = findViewById(R.id.taskDetailsButton);
+        taskDetailsButton.setOnClickListener(view -> {
+            Intent taskDetailsButtonIntent = new Intent(MainActivity.this, TaskDetail.class);
+            startActivity(taskDetailsButtonIntent);
+        });
     }
 
 
