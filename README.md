@@ -24,6 +24,6 @@
         - For now, ensure that you’re writing good unit tests for anything unit-testable in your code.
     * Screenshots
         - ![Home Page](screenshots/home-page.jpeg)
-        - ![image description](screenshots/path_to_screenshot_file.png)
-        - ![image description](screenshots/path_to_screenshot_file.png)
+        - ![image description](screenshots/add-task.jpeg)
+        - ![image description](screenshots/all-tasks.jpeg)
 
