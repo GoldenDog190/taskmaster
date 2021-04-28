@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
-        <activity android:name=".activity.RecyclerView"></activity>
+
         <activity android:name=".activity.Settings" />
         <activity android:name=".activity.TaskDetail" />
         <!--
@@ -25,11 +25,6 @@
         <activity
             android:name=".activity.AllTasks"
             android:label="@string/title_activity_all_tasks">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.AddTask" />
         <activity android:name=".activity.MainActivity">

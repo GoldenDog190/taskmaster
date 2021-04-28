@@ -10,13 +10,13 @@
         android:id="@+id/taskButtonThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="284dp"
         android:layout_marginBottom="64dp"
         android:text="Task Three"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskButtonOne"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/AddATaskButton"
+        app:layout_constraintVertical_bias="0.138" />
 
     <TextView
         android:id="@+id/textView"
@@ -34,10 +34,10 @@
         android:id="@+id/imageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/AllTaskButton"
-        app:layout_constraintHorizontal_bias="0.572"
-        app:layout_constraintStart_toStartOf="@+id/AddATaskButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@android:drawable/picture_frame"
         tools:srcCompat="@android:drawable/picture_frame" />
@@ -46,32 +46,35 @@
         android:id="@+id/AddATaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Add a Task"
-        app:layout_constraintEnd_toStartOf="@+id/AllTaskButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsButton" />
 
     <Button
         android:id="@+id/AllTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="61dp"
+        android:layout_marginTop="32dp"
         android:text="All Tasks"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
         android:text="Settings"
         app:layout_constraintBottom_toTopOf="@+id/taskButtonOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddATaskButton"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintTop_toBottomOf="@+id/AllTaskButton"
+        app:layout_constraintVertical_bias="0.173" />
 
     <Button
         android:id="@+id/taskButtonTwo"
@@ -80,25 +83,24 @@
         android:layout_marginBottom="64dp"
         android:text="Task Two"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/taskButtonThree"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/settingsButton"
-        app:layout_constraintTop_toBottomOf="@+id/taskButtonOne"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/taskButtonOne"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.159" />
 
     <Button
         android:id="@+id/taskButtonOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:text="Task One"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/taskButtonThree"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
         app:layout_constraintStart_toStartOf="@+id/textViewTasks"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.14" />
 
     <TextView
         android:id="@+id/textViewTasks"
@@ -115,7 +117,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskRecycleView"
-        android:layout_width="163dp"
+        android:layout_width="match_parent"
         android:layout_height="222dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

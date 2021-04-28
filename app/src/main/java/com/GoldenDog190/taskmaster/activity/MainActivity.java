@@ -2,6 +2,7 @@ package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements TaskViewAdapter.TaskListener {
     public static String TAG = "GoldenDog190.MainActivity";
 
     @Override
@@ -74,9 +75,9 @@ public class MainActivity extends AppCompatActivity  {
         taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
         taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
         taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
-        RecyclerView rv = findViewById(R.id.);
+        RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new TaskViewAdapter(taskModels));
+       rv.setAdapter(new TaskViewAdapter(taskModels, this));
     }
 
     @Override
@@ -97,4 +98,8 @@ public class MainActivity extends AppCompatActivity  {
         };
     }
 
+    @Override
+    public void listener(TaskModel taskModel) {
+
+    }
 }
