@@ -7,10 +7,9 @@
     tools:context=".Settings">
 
     <TextView
-        android:id="@+id/settingsTextView"
+        android:id="@+id/settingsTextViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,10 +34,9 @@
         android:ems="10"
         android:hint="UserName"
         android:inputType="textPersonName"
-        android:text="Username"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsTextViewName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
