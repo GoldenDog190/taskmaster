@@ -1,4 +1,4 @@
-package com.GoldenDog190.taskmaster;
+package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.R;
+
 public class AddTask extends AppCompatActivity {
-    public static String TAG = "GoldenDog190.main";
+    public static String TAG = "GoldenDog190.AddTask";
+    Integer count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,7 @@ public class AddTask extends AppCompatActivity {
         Button button = findViewById(R.id.TaskButton);
         button.setOnClickListener(view -> {
             Log.i(TAG, "this is the add task button");
+            count += 1;
             ((TextView)findViewById(R.id.TaskButton)).setText("Submitted!");
 
             String taskTitle = ((EditText)findViewById(R.id.editTextTextTaskTitle)).getText().toString();
@@ -31,5 +35,6 @@ public class AddTask extends AppCompatActivity {
             intent.putExtra("TaskDescription", taskDescription);
             startActivity(intent);
         });
+
     }
 }

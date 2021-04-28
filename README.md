@@ -1,5 +1,6 @@
 # Task Master
 * This app has a home page, a add task page that allows you to add tasks, and a all task page to look at the tasks you have added.
+* It also has a settings page where you can save your username, and a task detail page where you can look at your tasks in more detail.
 
 ## Daily Change Log:
 ### Lab 26 Beginning TaskMaster
@@ -27,3 +28,16 @@
         - ![Add A Task Page](screenshots/add-task.jpeg)
         - ![All Tasks Page](screenshots/all-tasks.jpeg)
 
+### Lab 27 Data in TaskMaster
+    * Feature Tasks
+        - Task Detail Page
+          * Create a Task Detail page. It should have a title at the top of the page, and a Lorem Ipsum description.
+        - Settings Page
+          * Create a Settings page. It should allow users to enter their username and hit save.
+        - Homepage
+          * The main page should be modified to contain three different buttons with hardcoded task titles. When a user taps one of the titles, it should go to the Task Detail page, and the title at the top of the page should match the task title that was tapped on the previous page.
+          * The homepage should also contain a button to visit the Settings page, and once the user has entered their username, it should display “{username}’s tasks” above the three task buttons.
+    * Screenshots
+        - ![Home Page](screenshots/home-page-version-2.jpeg)
+        - ![Task Detail Page](screenshots/task-detail.jpeg)
+        - ![Settings Page](screenshots/settings.jpeg)
