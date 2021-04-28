@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AllTasks extends AppCompatActivity {
 
-    public static String TAG = "GoldenDog190.main";
+    public static String TAG = "GoldenDog190.AllTasks";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

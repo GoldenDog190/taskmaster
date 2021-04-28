@@ -17,7 +17,7 @@ import java.util.Locale;
 import static android.content.Intent.*;
 
 public class MainActivity extends AppCompatActivity {
-    public static String TAG = "GoldenDog190.main";
+    public static String TAG = "GoldenDog190.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +45,6 @@ public class MainActivity extends AppCompatActivity {
             Intent settingsButtonIntent  = new Intent(MainActivity.this, Settings.class);
             startActivity(settingsButtonIntent);
         });
-
-//        Button taskDetailsButton = findViewById(R.id.taskDetailsButton);
-//        taskDetailsButton.setOnClickListener(view -> {
-//            Intent taskDetailsButtonIntent = new Intent(MainActivity.this, TaskDetail.class);
-//            startActivity(taskDetailsButtonIntent);
-//        });
 
 
         Button taskDetailsButtonOne = findViewById(R.id.taskButtonOne);
