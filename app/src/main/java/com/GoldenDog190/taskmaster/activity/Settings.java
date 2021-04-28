@@ -1,4 +1,4 @@
-package com.GoldenDog190.taskmaster;
+package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.GoldenDog190.taskmaster.R;
 
 public class Settings extends AppCompatActivity {
 

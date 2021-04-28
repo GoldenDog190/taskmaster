@@ -1,4 +1,4 @@
-package com.GoldenDog190.taskmaster;
+package com.GoldenDog190.taskmaster.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.widget.Button;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.GoldenDog190.taskmaster.R;
 
 public class AllTasks extends AppCompatActivity {
 

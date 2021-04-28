@@ -1,4 +1,4 @@
-package com.GoldenDog190.taskmaster;
+package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,12 +9,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Locale;
+import com.GoldenDog190.taskmaster.R;
 
-import static android.content.Intent.*;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     public static String TAG = "GoldenDog190.MainActivity";
