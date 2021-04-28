@@ -1,6 +1,7 @@
 package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
+import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
+import com.GoldenDog190.taskmaster.models.TaskModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     public static String TAG = "GoldenDog190.MainActivity";
 
     @Override
@@ -63,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
             Intent taskDetailsButtonThreeIntent = new Intent(MainActivity.this, TaskDetail.class);
             startActivity(taskDetailsButtonThreeIntent);
         });
+
+        //===============RecycleView===================================
+        List<TaskModel> taskModels = new ArrayList<>();
+        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
+        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
+        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
+        RecyclerView rv = findViewById(R.id.);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new TaskViewAdapter(taskModels));
     }
 
     @Override
