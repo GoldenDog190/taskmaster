@@ -10,10 +10,11 @@
         android:id="@+id/taskButtonThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="64dp"
         android:text="Task Three"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/taskDetailsButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskButtonOne" />
 
     <TextView
@@ -70,18 +71,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddATaskButton"
         app:layout_constraintVertical_bias="0.16" />
-
-    <Button
-        android:id="@+id/taskDetailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Task Details"
-        app:layout_constraintBottom_toTopOf="@+id/taskButtonThree"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toEndOf="@+id/settingsButton"
-        app:layout_constraintTop_toBottomOf="@+id/AllTaskButton"
-        app:layout_constraintVertical_bias="0.119" />
 
     <Button
         android:id="@+id/taskButtonTwo"
