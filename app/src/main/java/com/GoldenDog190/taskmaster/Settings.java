@@ -20,12 +20,12 @@ public class Settings extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("username", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
+        ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("username", ""));
         saveButton.setOnClickListener(view -> {
             String usernameInput = ((EditText)findViewById(R.id.editTextTextUserName)).getText().toString();
+            ((TextView)findViewById(R.id.settingsTextViewName)).setText(usernameInput);
             editor.putString("username", usernameInput);
             editor.apply();
-            ((TextView)findViewById(R.id.settingsTextViewName)).setText(usernameInput);
         });
     }
 
