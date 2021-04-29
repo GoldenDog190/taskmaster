@@ -1,6 +1,7 @@
 # Task Master
 * This app has a home page, a add task page that allows you to add tasks, and a all task page to look at the tasks you have added.
 * It also has a settings page where you can save your username, and a task detail page where you can look at your tasks in more detail.
+* It also has clickable tasks listed on the home page.
 
 ## Daily Change Log:
 ### Lab 26 Beginning TaskMaster
@@ -41,3 +42,17 @@
         - ![Home Page](screenshots/home-page-version-2.jpeg)
         - ![Task Detail Page](screenshots/task-detail.jpeg)
         - ![Settings Page](screenshots/settings.jpeg)
+
+### Lab 28 RecyclerView
+    * Feature Tasks
+        - Task Model
+         * Create a Task class. A Task should have a title, a body, and a state.
+         * The state should be one of “new”, “assigned”, “in progress”, or “complete”.
+        - Homepage
+         * Refactor your homepage to use a RecyclerView for displaying Task data. This should have hardcoded Task data for now.
+         * Some steps you will likely want to take to accomplish this:
+          - Create a ViewAdapter class that displays data from a list of Tasks.
+          - In your MainActivity, create at least three hardcoded Task instances and use those to populate your RecyclerView/ViewAdapter.
+          - Ensure that you can tap on any one of the Tasks in the RecyclerView, and it will appropriately launch the detail page with the correct Task title displayed.
+    * Screenshots
+            - ![Home Page](screenshots/home-page-version-3.jpeg)
