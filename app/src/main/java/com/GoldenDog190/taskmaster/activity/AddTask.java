@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
+import com.GoldenDog190.taskmaster.models.TaskModel;
 
 public class AddTask extends AppCompatActivity {
     public static String TAG = "GoldenDog190.AddTask";
@@ -26,7 +27,7 @@ public class AddTask extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        taskDatabase.taskModelDoa().findAll();
+
 
         Button button = findViewById(R.id.TaskButton);
         button.setOnClickListener(view -> {
@@ -34,13 +35,20 @@ public class AddTask extends AppCompatActivity {
             count += 1;
             ((TextView)findViewById(R.id.TaskButton)).setText("Submitted!");
 
-            String taskTitle = ((EditText)findViewById(R.id.editTextTextTaskTitle)).getText().toString();
+            String title = ((EditText)findViewById(R.id.editTextTextTaskTitle)).getText().toString();
 
-            String taskDescription = ((EditText)findViewById(R.id.editTextTextTaskDescription)).getText().toString();
+            String body = ((EditText)findViewById(R.id.editTextTextTaskDescription)).getText().toString();
+
+            String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
+
+            //Save a TaskModel
+            TaskModel taskModel = new TaskModel(title, body, assigned);
+            taskDatabase.taskModelDoa().insert(taskModel);
 
             Intent intent = new Intent(AddTask.this, AllTasks.class);
-            intent.putExtra("TaskTitle", taskTitle);
-            intent.putExtra("TaskDescription", taskDescription);
+            intent.putExtra("task", title);
+            intent.putExtra("body", body);
+            intent.putExtra("assigned", assigned);
             startActivity(intent);
         });
 
