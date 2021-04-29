@@ -39,4 +39,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
+
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+// Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }
