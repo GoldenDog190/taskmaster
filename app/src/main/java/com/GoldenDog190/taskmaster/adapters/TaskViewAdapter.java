@@ -1,5 +1,6 @@
 package com.GoldenDog190.taskmaster.adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.GoldenDog190.taskmaster.R;
+import com.GoldenDog190.taskmaster.activity.MainActivity;
 import com.GoldenDog190.taskmaster.activity.RecyclerViewTasks;
+import com.GoldenDog190.taskmaster.fragment.TaskFragment;
 import com.GoldenDog190.taskmaster.models.TaskModel;
 
 import java.util.List;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskModelViewHolder> {
     static String TAG = "GoldenDog190.TaskViewAdapter";
@@ -45,6 +50,8 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
         holder.itemView.setOnClickListener(v -> {
             Log.i(TAG, "clicked on fragment");
+//        Intent intent = new Intent( MainActivity.this, MainActivity.class);
+//        startActivity(intent);
         });
     }
 
@@ -59,6 +66,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
 
     public class TaskModelViewHolder extends RecyclerView.ViewHolder {
+//        public String design;
         public int position;
         public TaskModelViewHolder(@NonNull View itemView){
             super(itemView);

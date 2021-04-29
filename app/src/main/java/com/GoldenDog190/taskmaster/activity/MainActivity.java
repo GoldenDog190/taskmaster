@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +99,11 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
         };
     }
 
+
     @Override
     public void listener(TaskModel taskModel) {
-
+//        Snackbar.make(findViewById(R.id.mainConstraintLayout), taskModel.design, Snackbar.LENGTH_SHORT).show();
+        Intent intent = new Intent( MainActivity.this, TaskDetail.class);
+       startActivity(intent);
     }
 }

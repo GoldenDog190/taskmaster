@@ -55,5 +55,3 @@
           - Ensure that you can tap on any one of the Tasks in the RecyclerView, and it will appropriately launch the detail page with the correct Task title displayed.
     * Screenshots
             - ![Home Page](screenshots/home-page-version-3.jpeg)
-            - ![Fragment Task](screenshots/fragment-task.jpeg)
-            - ![Recycler View](screenshots/recycler-view.jpeg)
