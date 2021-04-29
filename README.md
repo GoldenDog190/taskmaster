@@ -1,6 +1,7 @@
 # Task Master
 * This app has a home page, a add task page that allows you to add tasks, and a all task page to look at the tasks you have added.
 * It also has a settings page where you can save your username, and a task detail page where you can look at your tasks in more detail.
+* It also has clickable tasks listed on the home page.
 
 ## Daily Change Log:
 ### Lab 26 Beginning TaskMaster
