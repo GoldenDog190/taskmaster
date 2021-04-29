@@ -4,6 +4,7 @@
 * It also has clickable tasks listed on the home page.
 
 ## Daily Change Log:
+
 ### Lab 26 Beginning TaskMaster
     * Setup
         - To start, create a new directory and repo to hold this app. Name it taskmaster.
@@ -55,4 +56,24 @@
           - In your MainActivity, create at least three hardcoded Task instances and use those to populate your RecyclerView/ViewAdapter.
           - Ensure that you can tap on any one of the Tasks in the RecyclerView, and it will appropriately launch the detail page with the correct Task title displayed.
     * Screenshots
-            - ![Home Page](screenshots/home-page-version-3.jpeg)
+        - ![Home Page](screenshots/home-page-version-3.jpeg)
+
+### Lab 29 Room
+    * Feature Tasks
+        - Task Model and Room
+          * Following the directions provided in the Android documentation, set up Room in your application, and modify your Task class to be an Entity.
+        - Add Task Form
+          * Modify your Add Task form to save the data entered in as a Task in your local database.
+        - Homepage
+          * Refactor your homepage’s RecyclerView to display all Task entities in your database.
+        - Detail Page
+          * Ensure that the description and status of a tapped task are also displayed on the detail page, in addition to the title.
+          * (Note that you can accomplish this by passing along the entire Task entity, or by passing along only its ID in the intent.)
+    * Documentation
+        - Update your daily change log with today’s changes.
+    * Testing
+        - Ensure that you have used Espresso to test relevant functionality of your application; for instance, tap on an item on the My Tasks page, and ensure that the correct details are rendered on the Detail page.
+    * Screenshots
+        - ![Home Page](screenshots/home-page-version-4.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-version-2.jpeg)
+        - ![Add A Task Page](screenshots/add-task-version-2.jpeg)
