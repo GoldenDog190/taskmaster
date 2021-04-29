@@ -45,7 +45,7 @@ public class AddTask extends AppCompatActivity {
             TaskModel taskModel = new TaskModel(title, body, assigned);
             taskDatabase.taskModelDoa().insert(taskModel);
 
-            Intent intent = new Intent(AddTask.this, AllTasks.class);
+            Intent intent = new Intent(AddTask.this, TaskDetail.class);
             intent.putExtra("task", title);
             intent.putExtra("body", body);
             intent.putExtra("assigned", assigned);
