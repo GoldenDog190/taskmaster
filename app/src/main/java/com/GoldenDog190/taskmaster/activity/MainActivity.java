@@ -3,6 +3,7 @@ package com.GoldenDog190.taskmaster.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
+import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,11 +26,18 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.TaskListener {
     public static String TAG = "GoldenDog190.MainActivity";
+    TaskDatabase taskDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//===========load database==========
+        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
+                .allowMainThreadQueries()
+                .build();
+
+
 
         Button addATaskButton = findViewById(R.id.AddATaskButton);
         addATaskButton.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
         });
 
         //===============RecycleView===================================
-        List<TaskModel> taskModels = new ArrayList<>();
+        List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
         taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
         taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
         taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
