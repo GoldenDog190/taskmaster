@@ -20,7 +20,7 @@ import com.GoldenDog190.taskmaster.models.TaskModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskDetail extends AppCompatActivity {
+public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.TaskListener {
     public static String TAG = "GoldenDog190.TaskDetails";
     TaskDatabase taskDatabase;
 
@@ -56,12 +56,17 @@ public class TaskDetail extends AppCompatActivity {
 //
 //        }
         List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
-        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
-        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
-        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
+//        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
+//        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
+//        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
         RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new TaskViewAdapter(taskModels));
+        rv.setAdapter(new TaskViewAdapter(taskModels, this));
+
+    }
+
+    @Override
+    public void listener(TaskModel taskModel) {
 
     }
 }

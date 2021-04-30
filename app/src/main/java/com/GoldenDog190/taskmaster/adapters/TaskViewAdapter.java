@@ -30,9 +30,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
         this.listener = listener;
     }
 
-    public TaskViewAdapter(List<TaskModel> taskModels) {
-    }
-
     @NonNull
     @Override
     public TaskViewAdapter.TaskModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

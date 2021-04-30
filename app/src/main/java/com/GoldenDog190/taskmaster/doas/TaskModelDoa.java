@@ -16,6 +16,6 @@ public interface TaskModelDoa {
     @Query("SELECT * FROM TaskModel")
     public List<TaskModel> findAll();
 
-    @Query("SELECT * FROM TaskModel")
-    public List<TaskModel> findAllReversed();
+//    @Query("SELECT * FROM TaskModel")
+//    public List<TaskModel> findAllReversed();
 }
