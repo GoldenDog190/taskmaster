@@ -80,6 +80,14 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
             startActivity(taskDetailsButtonThreeIntent);
         });
 
+        findViewById(R.id.taskRecycleView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TaskDetail.class);
+                startActivity(intent);
+            }
+        });
+
         //===============RecycleView===================================
         List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
         taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
@@ -88,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
         RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setLayoutManager(new LinearLayoutManager(this));
        rv.setAdapter(new TaskViewAdapter(taskModels, this));
+
+//        rv.setLayoutManager(new LinearLayoutManager(this));
+//        rv.setAdapter(new TaskViewAdapter(v -> {
+//            Intent intent = new Intent(MainActivity.this, TaskDetail.class);
+//            intent.putExtra("tasks", v.getText().toString());
+//            MainActivity.this.startActivity(intent);
+//        },
+//                taskDatabase.taskModelDoa().findAll()));
+
+
     }
 
     @Override
@@ -98,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
         String task = "Tasks";
         if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
             ((TextView)findViewById(R.id.textViewTasks)).setText(task);
-    }
+
+        }
 
     private View.OnClickListener TaskButton(){
         return view -> {
@@ -112,7 +131,5 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
     @Override
     public void listener(TaskModel taskModel) {
 //        Snackbar.make(findViewById(R.id.mainConstraintLayout), taskModel.design, Snackbar.LENGTH_SHORT).show();
-        Intent intent = new Intent( MainActivity.this, TaskDetail.class);
-       startActivity(intent);
     }
 }

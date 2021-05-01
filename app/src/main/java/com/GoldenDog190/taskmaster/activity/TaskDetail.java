@@ -33,6 +33,12 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Tas
                 .allowMainThreadQueries()
                 .build();
 
+        Button goHomeButton = findViewById(R.id.goHomeButton);
+        goHomeButton.setOnClickListener(view -> {
+            Intent goHomeButtonIntent = new Intent(TaskDetail.this, MainActivity.class);
+            startActivity(goHomeButtonIntent);
+        });
+
 //            TextView taskName = (TextView)findViewById(R.id.textTaskTitle);
 //            taskName.setText("task");
 //            Intent intent = getIntent();
@@ -55,6 +61,8 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Tas
 //            ((TextView) findViewById(R.id.editTextTextMultiLine)).setText(info);
 //
 //        }
+
+
         List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
 //        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
 //        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
@@ -67,6 +75,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Tas
 
     @Override
     public void listener(TaskModel taskModel) {
+
 
     }
 }
