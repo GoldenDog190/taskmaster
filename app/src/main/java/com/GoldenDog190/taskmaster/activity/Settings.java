@@ -2,6 +2,7 @@ package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,12 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         Button saveButton = findViewById(R.id.saveButton);
+
+        Button goSettingsHomeButton = findViewById(R.id.goHomeSettingsButton);
+        goSettingsHomeButton.setOnClickListener(view -> {
+            Intent goSettingsHomeButtonIntent = new Intent(Settings.this, MainActivity.class);
+            startActivity(goSettingsHomeButtonIntent);
+        });
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("username", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

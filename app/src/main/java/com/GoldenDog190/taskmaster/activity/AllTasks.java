@@ -20,7 +20,7 @@ public class AllTasks extends AppCompatActivity {
 
     Button goBackButton = findViewById(R.id.backButton);
     goBackButton.setOnClickListener(view -> {
-        Intent goBackButtonIntent = new Intent(AllTasks.this, AddTask.class);
+        Intent goBackButtonIntent = new Intent(AllTasks.this, MainActivity.class);
         startActivity(goBackButtonIntent);
     });
 

@@ -6,7 +6,7 @@
 
 ## Daily Change Log:
 
-### Lab 26 Beginning TaskMaster
+### Day 1 - Lab 26 Beginning TaskMaster
     * Setup
         - To start, create a new directory and repo to hold this app. Name it taskmaster.
         - Within that directory, use Android Studio to set up a new app, as discussed in class.
@@ -31,7 +31,7 @@
         - ![Add A Task Page](screenshots/add-task.jpeg)
         - ![All Tasks Page](screenshots/all-tasks.jpeg)
 
-### Lab 27 Data in TaskMaster
+### Day 2 - Lab 27 Data in TaskMaster
     * Feature Tasks
         - Task Detail Page
           * Create a Task Detail page. It should have a title at the top of the page, and a Lorem Ipsum description.
@@ -44,8 +44,9 @@
         - ![Home Page](screenshots/home-page-version-2.jpeg)
         - ![Task Detail Page](screenshots/task-detail.jpeg)
         - ![Settings Page](screenshots/settings.jpeg)
+        - ![Settings Page](screenshots/settings-version-2.jpeg)
 
-### Lab 28 RecyclerView
+### Day 3 - Lab 28 RecyclerView
     * Feature Tasks
         - Task Model
          * Create a Task class. A Task should have a title, a body, and a state.
@@ -59,7 +60,7 @@
     * Screenshots
         - ![Home Page](screenshots/home-page-version-3.jpeg)
 
-### Lab 29 Room
+### Day 4 - Lab 29 Room
     * Feature Tasks
         - Task Model and Room
           * Following the directions provided in the Android documentation, set up Room in your application, and modify your Task class to be an Entity.
@@ -77,4 +78,6 @@
     * Screenshots
         - ![Home Page](screenshots/home-page-version-4.jpeg)
         - ![Task Detail Page](screenshots/task-detail-version-2.jpeg)
+         - ![Task Detail Page](screenshots/task-detail-version-3.jpeg)
         - ![Add A Task Page](screenshots/add-task-version-2.jpeg)
+
