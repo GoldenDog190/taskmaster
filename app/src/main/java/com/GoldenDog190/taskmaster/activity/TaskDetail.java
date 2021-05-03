@@ -64,9 +64,9 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 
 
         List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
-//        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
-//        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
-//        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
+        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
+        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
+        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
         RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new TaskViewAdapter(taskModels, this));
