@@ -20,7 +20,7 @@ import com.GoldenDog190.taskmaster.models.TaskModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.TaskListener {
+public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.TaskDetails";
     TaskDatabase taskDatabase;
 
@@ -73,9 +73,14 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Tas
 
     }
 
-    @Override
-    public void listener(TaskModel taskModel) {
+//    @Override
+//    public void listener(TaskModel taskModel) {
+//
+//
+//    }
 
+    @Override
+    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
 
     }
 }

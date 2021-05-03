@@ -78,6 +78,23 @@
     * Screenshots
         - ![Home Page](screenshots/home-page-version-4.jpeg)
         - ![Task Detail Page](screenshots/task-detail-version-2.jpeg)
-         - ![Task Detail Page](screenshots/task-detail-version-3.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-version-3.jpeg)
         - ![Add A Task Page](screenshots/add-task-version-2.jpeg)
+
+### Day 5 - Lab 31 Espresso and Polish
+    * Feature Tasks
+        - Espresso Testing
+          * Add Espresso to your application, and use it to test basic functionality of the main components of your application. For example:
+          * assert that important UI elements are displayed on the page
+          * tap on a task, and assert that the resulting activity displays the name of that task
+          * edit the user’s username, and assert that it says the correct thing on the homepage
+    * Polish
+        - Complete any remaining feature tasks from previous days’ labs.
+    * Screenshots
+         - ![Home Page](screenshots/home-page-version-5.jpeg)
+         - ![Task Detail Page](screenshots/task-detail-version-4.jpeg)
+         - ![Settings Page](screenshots/settings-version-2.jpeg)
+         - ![Add A Task Page](screenshots/add-task-version-2.jpeg)
+         - ![All Tasks Page](screenshots/all-tasks.jpeg)
+
 
