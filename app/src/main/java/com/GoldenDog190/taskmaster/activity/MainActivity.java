@@ -24,9 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements TaskViewAdapter.TaskListener {
+public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
     TaskDatabase taskDatabase;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
     @Override
     protected void onResume(){
         super.onResume();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = preferences.getString("username", null);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String username = preferences.getString("username", "");
+        Log.i(TAG,"username" + username);
         String task = "Tasks";
         if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
             ((TextView)findViewById(R.id.textViewTasks)).setText(task);
@@ -122,14 +124,22 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.T
     private View.OnClickListener TaskButton(){
         return view -> {
             Intent intent = new Intent(MainActivity.this, TaskDetail.class);
-            intent.putExtra("tasks", ((Button)view).getText().toString());
             MainActivity.this.startActivity(intent);
         };
     }
 
 
+//    @Override
+//    public void listener(TaskModel taskModel) {
+//        Log.i(TAG, "task " + taskModel.title);
+////        Snackbar.make(findViewById(R.id.mainConstraintLayout), taskModel.design, Snackbar.LENGTH_SHORT).show();
+//    }
+
     @Override
-    public void listener(TaskModel taskModel) {
-//        Snackbar.make(findViewById(R.id.mainConstraintLayout), taskModel.design, Snackbar.LENGTH_SHORT).show();
+    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
+        TaskModel taskModel = taskModelViewHolder.taskModel;
+        Intent intent = new Intent(MainActivity.this, TaskDetail.class);
+        MainActivity.this.startActivity(intent);
+        Log.i(TAG, "task " + taskModel.body);
     }
 }
