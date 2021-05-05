@@ -1,6 +1,5 @@
 package com.GoldenDog190.taskmaster.adapters;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.GoldenDog190.taskmaster.R;
-import com.GoldenDog190.taskmaster.activity.MainActivity;
-import com.GoldenDog190.taskmaster.activity.RecyclerViewTasks;
-import com.GoldenDog190.taskmaster.fragment.TaskFragment;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.List;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskModelViewHolder> {
     static String TAG = "GoldenDog190.TaskViewAdapter";
 //    public TaskListener listener;
     public ClickOnTaskAble clickOnTaskAble;
-    List<TaskModel> taskModelList;
+    List<Todo> taskModelList;
 
-    public TaskViewAdapter(List<TaskModel> taskModelList, ClickOnTaskAble listener){
+    public TaskViewAdapter(List<Todo> taskModelList, ClickOnTaskAble listener){
         this.taskModelList = taskModelList;
        this.clickOnTaskAble = listener;
     }
@@ -68,7 +63,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
     public class TaskModelViewHolder extends RecyclerView.ViewHolder {
 //        public String design;
-        public TaskModel taskModel;
+        public Todo taskModel;
         public int position;
         public TaskModelViewHolder(@NonNull View itemView){
             super(itemView);

@@ -16,22 +16,25 @@ import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.TaskDetails";
-    TaskDatabase taskDatabase;
+//    TaskDatabase taskDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
-        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
-                .allowMainThreadQueries()
-                .build();
+//        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
+//                .allowMainThreadQueries()
+//                .build();
 
         Button goHomeButton = findViewById(R.id.goHomeButton);
         goHomeButton.setOnClickListener(view -> {
@@ -63,13 +66,31 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        }
 
 
-        List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
-        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
-        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
-        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
-        RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new TaskViewAdapter(taskModels, this));
+//        List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
+//        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
+//        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
+//        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
+//        RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
+//        rv.setLayoutManager(new LinearLayoutManager(this));
+//        rv.setAdapter(new TaskViewAdapter(taskModels, this));
+
+        List<Todo> taskModels = new ArrayList<>();
+        Amplify.API.query(
+                ModelQuery.list(Todo.class),
+                response -> {
+                    Log.i(TAG, "onCreate: success");
+
+                    for(Todo task : response.getData().getItems()) {
+                        System.out.println(task.getTitle());
+                        Log.i(TAG, "tasks:" + task.getTitle());
+                        taskModels.add(task);
+                    }
+                },
+                    res -> Log.i(TAG, "onCreate: failure" + res.toString())
+        );
+                    RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
+                    rv.setLayoutManager(new LinearLayoutManager(this));
+                    rv.setAdapter(new TaskViewAdapter(taskModels, this));
 
     }
 
