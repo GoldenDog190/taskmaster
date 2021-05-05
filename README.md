@@ -111,5 +111,5 @@
         * Refactor your homepage’s RecyclerView to display all Task entities in DynamoDB.
     * Screenshots
       - ![Home Page](screenshots/home-page-version-6.jpeg)
-      - ![Task Detail Page](screenshots/task-detail-version-6.jpeg)
+      - ![Task Detail Page](screenshots/973EE032-F832-483C-8FA0-A1759D28C841.jpeg)
       - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
