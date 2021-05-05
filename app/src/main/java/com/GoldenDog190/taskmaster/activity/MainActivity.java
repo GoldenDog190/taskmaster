@@ -68,15 +68,11 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                 super.handleMessage(msg);
                 Log.i(TAG, "handleMessage: hit second handler");
                 if (msg.what == 1) {
-//                    StringJoiner sj = null;
-//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                        sj = new StringJoiner(", ");
-//                    }
                     StringJoiner sj = new StringJoiner(", ");
                     for (Todo task : taskModel) {
                         sj.add(task.getTitle());
                     }
-                    ((TextView) findViewById(R.id.taskRecycleView)).setText(sj.toString());
+//                    (() findViewById(R.id.taskRecycleView)).setText(sj.toString());
                     rv.getAdapter().notifyDataSetChanged();
                 }
             }
@@ -99,11 +95,13 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         Amplify.API.query(
                 ModelQuery.list(Todo.class),
                 response -> {
-                    List<Todo> tasks = new ArrayList<>();
+                    List<Todo> taskModel = new ArrayList<>();
                     for (Todo task : response.getData()){
-                        tasks.add(task);
+                        taskModel.add(task);
                         Log.i(TAG, "task: " + task.getClass());
                     }
+                    mainThreadHandler.sendEmptyMessage(1);
+
                 },
                 response -> Log.i(TAG, "onCreate: failed to retrieve" + response.toString())
         );

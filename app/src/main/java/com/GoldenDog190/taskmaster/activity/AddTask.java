@@ -52,8 +52,12 @@ public class AddTask extends AppCompatActivity {
 
             Amplify.API.mutate(
                     ModelMutation.create(taskModel),
-                    response -> {},
-                    response -> {}
+                    response -> {
+                        Log.i(TAG, "onCreate: successfully added");
+                    },
+                    response -> {
+                        Log.i(TAG, "onCreate: failed to save");
+                    }
             );
 
             //Save a TaskModel
