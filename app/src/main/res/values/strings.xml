@@ -31,4 +31,9 @@
     <string name="total_tasks_0">Total tasks: 0</string>
     <string name="assigned">assigned</string>
     <string name="home">home</string>
+    <string name="team_name">Team Name</string>
+    <string name="team_c">Team C</string>
+    <string name="radiobutton">RadioButton</string>
+    <string name="team_b">Team B</string>
+    <string name="team_a">Team A</string>
 </resources>
