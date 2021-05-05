@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
 
 public class AddTask extends AppCompatActivity {
     public static String TAG = "GoldenDog190.AddTask";
@@ -23,9 +26,9 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 // =============Load the database====================
-        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
-                .allowMainThreadQueries()
-                .build();
+//        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
+//                .allowMainThreadQueries()
+//                .build();
 
 
 
@@ -41,9 +44,21 @@ public class AddTask extends AppCompatActivity {
 
             String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
 
+            Todo taskModel = Todo.builder()
+                    .title(title)
+                    .body(body)
+                    .assigned(assigned)
+                    .build();
+
+            Amplify.API.mutate(
+                    ModelMutation.create(taskModel),
+                    response -> {},
+                    response -> {}
+            );
+
             //Save a TaskModel
-            TaskModel taskModel = new TaskModel(title, body, assigned);
-            taskDatabase.taskModelDoa().insert(taskModel);
+//            TaskModel taskModel = new TaskModel(title, body, assigned);
+//            taskDatabase.taskModelDoa().insert(taskModel);
 
             Intent intent = new Intent(AddTask.this, TaskDetail.class);
             intent.putExtra("task", title);

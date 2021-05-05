@@ -1,5 +1,7 @@
 package com.GoldenDog190.taskmaster.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,7 +9,10 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -18,26 +23,95 @@ import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringJoiner;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
-    TaskDatabase taskDatabase;
+//    TaskDatabase taskDatabase;
     SharedPreferences preferences;
+    public List<Todo> taskModel = new ArrayList<>();
+    Handler mainThreadHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//===========load database==========
-        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
-                .allowMainThreadQueries()
-                .build();
 
+        RecyclerView rv = findViewById(R.id.taskRecycleView);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new TaskViewAdapter(taskModel, this));
+
+// AWS Amplify
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+            Log.i(TAG, "configured amplify");
+        } catch (AmplifyException e){
+            e.printStackTrace();
+
+        }
+        mainThreadHandler = new Handler(this.getMainLooper()) {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                Log.i(TAG, "handleMessage: hit second handler");
+                if (msg.what == 1) {
+//                    StringJoiner sj = null;
+//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                        sj = new StringJoiner(", ");
+//                    }
+                    StringJoiner sj = new StringJoiner(", ");
+                    for (Todo task : taskModel) {
+                        sj.add(task.getTitle());
+                    }
+                    ((TextView) findViewById(R.id.taskRecycleView)).setText(sj.toString());
+                    rv.getAdapter().notifyDataSetChanged();
+                }
+            }
+        };
+
+
+
+
+        Todo newTaskModel = Todo.builder()
+                .title("task: homework")
+                .body("Work on lab")
+                .assigned("today")
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newTaskModel),
+                response -> Log.i(TAG, "onCreate: task made successfully"),
+                response -> Log.i(TAG, response.toString())
+        );
+
+        Amplify.API.query(
+                ModelQuery.list(Todo.class),
+                response -> {
+                    List<Todo> tasks = new ArrayList<>();
+                    for (Todo task : response.getData()){
+                        tasks.add(task);
+                        Log.i(TAG, "task: " + task.getClass());
+                    }
+                },
+                response -> Log.i(TAG, "onCreate: failed to retrieve" + response.toString())
+        );
+
+//===========load database==========
+//        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
+//                .allowMainThreadQueries()
+//                .build();
 
 
         Button addATaskButton = findViewById(R.id.AddATaskButton);
@@ -90,13 +164,14 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         });
 
         //===============RecycleView===================================
-        List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
-        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
-        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
-        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
-        RecyclerView rv = findViewById(R.id.taskRecycleView);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-       rv.setAdapter(new TaskViewAdapter(taskModels, this));
+//        List<TaskModel> taskModels = taskDatabase.taskModelDoa().findAll();
+//        taskModels.add(new TaskModel("Task 1", "Walk the dog", "today"));
+//        taskModels.add(new TaskModel("Task 2", "Feed the cats", "today"));
+//        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
+//        RecyclerView rv = findViewById(R.id.taskRecycleView);
+//        rv.setLayoutManager(new LinearLayoutManager(this));
+//        rv.setAdapter(new TaskViewAdapter(taskModel, this));
+//       rv.setAdapter(new TaskViewAdapter(taskModels, this));
 
 //        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setAdapter(new TaskViewAdapter(v -> {
@@ -137,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
     @Override
     public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
-        TaskModel taskModel = taskModelViewHolder.taskModel;
+        Todo taskModel = taskModelViewHolder.taskModel;
         Intent intent = new Intent(MainActivity.this, TaskDetail.class);
         MainActivity.this.startActivity(intent);
         Log.i(TAG, "task " + taskModel.body);
