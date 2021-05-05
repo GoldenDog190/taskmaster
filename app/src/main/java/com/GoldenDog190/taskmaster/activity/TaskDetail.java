@@ -26,6 +26,7 @@ import java.util.List;
 public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.TaskDetails";
 //    TaskDatabase taskDatabase;
+            public List<Todo> taskModel = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setAdapter(new TaskViewAdapter(taskModels, this));
 
-        List<Todo> taskModels = new ArrayList<>();
+
         Amplify.API.query(
                 ModelQuery.list(Todo.class),
                 response -> {
@@ -83,14 +84,14 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
                     for(Todo task : response.getData().getItems()) {
                         System.out.println(task.getTitle());
                         Log.i(TAG, "tasks:" + task.getTitle());
-                        taskModels.add(task);
+                        taskModel.add(task);
                     }
                 },
                     res -> Log.i(TAG, "onCreate: failure" + res.toString())
         );
                     RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
                     rv.setLayoutManager(new LinearLayoutManager(this));
-                    rv.setAdapter(new TaskViewAdapter(taskModels, this));
+                    rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
     }
 

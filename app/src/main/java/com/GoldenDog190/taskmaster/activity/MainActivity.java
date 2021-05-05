@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         Amplify.API.query(
                 ModelQuery.list(Todo.class),
                 response -> {
-                    List<Todo> taskModel = new ArrayList<>();
+
                     for (Todo task : response.getData()){
                         taskModel.add(task);
                         Log.i(TAG, "task: " + task.getClass());
@@ -187,12 +187,16 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onResume();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
+        String teamname =  preferences.getString("teamname", "");
         Log.i(TAG,"username" + username);
+        Log.i(TAG,"teamname" + teamname);
         String task = "Tasks";
-        if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
+        if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username, teamname);
             ((TextView)findViewById(R.id.textViewTasks)).setText(task);
 
         }
+
+
 
     private View.OnClickListener TaskButton(){
         return view -> {

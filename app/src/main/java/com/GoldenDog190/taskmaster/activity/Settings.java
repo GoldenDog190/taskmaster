@@ -32,10 +32,14 @@ public class Settings extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("username", ""));
+        ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("teamname", ""));
         saveButton.setOnClickListener(view -> {
             String usernameInput = ((EditText)findViewById(R.id.editTextTextUserName)).getText().toString();
+            String teamnameInput = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
             ((TextView)findViewById(R.id.settingsTextViewName)).setText(usernameInput);
+            ((TextView)findViewById(R.id.settingsTextViewName)).setText(teamnameInput);
             editor.putString("username", usernameInput);
+            editor.putString("teamname", teamnameInput);
             editor.apply();
         });
     }
@@ -47,11 +51,18 @@ public class Settings extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("userdetails", MODE_PRIVATE);
         String username = preferences.getString("username", null);
-
         if(username !=null){
             ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
             ((EditText) findViewById(R.id.editTextTextUserName)).setText(username);
             Log.i("settings", username);
+        }
+
+        SharedPreferences preferencesTeam = getSharedPreferences("teamdetails", MODE_PRIVATE);
+        String teamname = preferencesTeam.getString("teamname", null);
+        if(teamname !=null){
+            ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
+            ((EditText) findViewById(R.id.editTextTextTeamName)).setText(username);
+            Log.i("settings", teamname);
         }
     }
 }
