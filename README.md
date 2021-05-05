@@ -113,3 +113,9 @@
       - ![Home Page](screenshots/home-page-version-6.jpeg)
       - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
       - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
+
+### Day 7 - Lab 33 Related Data
+    * Feature Tasks
+        -
+    * Screenshots
+        - 
