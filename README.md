@@ -125,7 +125,7 @@
        - Settings Page
          * In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
     * Screenshots
-        - ![Settings Page](screenshots/settings-version-4.jpeg)
-        - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
-        - ![Home Page](screenshots/home-page-version-7.jpeg)
+        - ![Settings Page](screenshots/settings-version-4.png)
+        - ![Add A Task Page](screenshots/add-task-version-3.png)
+        - ![Home Page](screenshots/home-page-version-7.png)
 
