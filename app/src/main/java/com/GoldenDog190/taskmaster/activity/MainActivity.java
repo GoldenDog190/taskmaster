@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
+//    public List<Todo> taskModel = new ArrayList<>();
     Handler mainThreadHandler;
 
     @Override
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Task[] task = new Task[1];
+//        Task[] task = new Task[1];
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -82,7 +83,20 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             }
         };
 
+//============================Lab 32====================================
+        //        Todo newTaskModel = Todo.builder()
+//                .title("task: homework")
+//                .body("Work on lab")
+//                .assigned("today")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTaskModel),
+//                response -> Log.i(TAG, "onCreate: task made successfully"),
+//                response -> Log.i(TAG, response.toString())
+//        );
+//=============================================================
 
+//========================Lab 33====================================
 //        TeamModel newTaskModel = TeamModel.builder()
 //                .task(task[0])
 //                .name("Team A")
@@ -217,14 +231,19 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onResume();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
-        String teamname =  preferences.getString("teamname", "");
         Log.i(TAG,"username" + username);
-        Log.i(TAG,"teamname" + teamname);
         String task = "Tasks";
-        if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username, teamname);
+        if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
             ((TextView)findViewById(R.id.textViewTasks)).setText(task);
 
-        }
+        String teamname =  preferences.getString("teamname", "");
+        Log.i(TAG,"teamname" + teamname);
+        String taskTeam = "Tasks";
+        if(teamname !=null) taskTeam = String.format(Locale.ENGLISH, "%s Tasks", teamname);
+        ((TextView)findViewById(R.id.textViewTasks)).setText(taskTeam);
+
+
+    }
 
 
 
