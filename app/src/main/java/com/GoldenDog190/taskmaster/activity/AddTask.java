@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
@@ -44,54 +46,25 @@ public class AddTask extends AppCompatActivity {
 //        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
 //                .allowMainThreadQueries()
 //                .build();
-//        Task[] task = new Task[1];
-        List<TeamModel> team = new ArrayList<>();
-//        List<Task> taskModel = new ArrayList<>();
 
-        mainThreadHandler = new Handler(this.getMainLooper()) {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
+
+        Spinner spinner = findViewById(R.id.spinner);
+        List<TeamModel> teams = new ArrayList<>();
+
+        Handler handler = new Handler(getMainLooper()){
             @Override
-            public void handleMessage(@NonNull Message msg) {
+            public void handleMessage(@NonNull Message msg){
                 super.handleMessage(msg);
-                Log.i(TAG, "handleMessage: hit second handler");
                 if (msg.what == 2) {
-                    StringJoiner sj = new StringJoiner(", ");
-
-                    }
-
-
+                    ArrayAdapter<TeamModel>  aAT = new ArrayAdapter<>(
+                            AddTask.this,
+                            R.layout.support_simple_spinner_dropdown_item,
+                            teams);
+                    spinner.setAdapter(aAT);
                 }
-            };
-
-// https://developer.android.com/guide/topics/ui/controls/radiobutton
-
-        RadioButton radioButton = findViewById(R.id.radioButton);
-        radioButton.setOnClickListener( view -> {
-            Log.i(TAG, "this is the radio button 1");
-            boolean checked = ((RadioButton) view).isChecked();
-
-            switch(view.getId()){
-                case R.id.radioButton:
-                    if(checked)
-                        break;
-                case R.id.radioButton2:
-                    if(checked)
-                        break;
-                case R.id.radioButton3:
-                    if(checked)
-                        break;
             }
-
-//            TeamModel tm = TeamModel.builder()
-//                    .task(task[0])
-//                    .build();
-//
-//            Amplify.API.mutate(
-//                    ModelMutation.create(tm),
-//                    r -> {},
-//                    r -> {}
-//            );
-        });
+        };
 
 
 
@@ -132,31 +105,23 @@ public class AddTask extends AppCompatActivity {
                     response -> Log.i(TAG, response.toString())
             );
 //
-//            TeamModel newTaskModelTwo = TeamModel.builder()
-//                    .task(task[0])
-//                    .name("Team B")
-//                    .title("task: exercise")
-//                    .body("Run 10 laps")
-//                    .assigned("tommorrow")
-//                    .build();
-//            Amplify.API.mutate(
-//                    ModelMutation.create(newTaskModelTwo),
-//                    response -> Log.i(TAG, "onCreate: task made successfully"),
-//                    response -> Log.i(TAG, response.toString())
-//            );
-//
-//            TeamModel newTaskModelThree = TeamModel.builder()
-//                    .task(task[0])
-//                    .name("Team A")
-//                    .title("task: homework")
-//                    .body("Work on lab")
-//                    .assigned("today")
-//                    .build();
-//            Amplify.API.mutate(
-//                    ModelMutation.create(newTaskModelThree),
-//                    response -> Log.i(TAG, "onCreate: task made successfully"),
-//                    response -> Log.i(TAG, response.toString())
-//            );
+            TeamModel newTaskModelTwo = TeamModel.builder()
+                    .name("Team B")
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newTaskModelTwo),
+                    response -> Log.i(TAG, "onCreate: task made successfully"),
+                    response -> Log.i(TAG, response.toString())
+            );
+
+            TeamModel newTaskModelThree = TeamModel.builder()
+                    .name("Team C")
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newTaskModelThree),
+                    response -> Log.i(TAG, "onCreate: task made successfully"),
+                    response -> Log.i(TAG, response.toString())
+            );
 
 
 
@@ -165,6 +130,7 @@ public class AddTask extends AppCompatActivity {
 //            taskDatabase.taskModelDoa().insert(taskModel);
 
             Intent intent = new Intent(AddTask.this, TaskDetail.class);
+//            intent.putExtra("name", name);
             intent.putExtra("task", title);
             intent.putExtra("body", body);
             intent.putExtra("assigned", assigned);
