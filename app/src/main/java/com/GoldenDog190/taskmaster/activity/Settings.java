@@ -34,7 +34,7 @@ public class Settings extends AppCompatActivity {
         List<TeamModel> teamModels = new ArrayList<>();
 
       String id = getIntent().getStringExtra("teamModelId");
-        Log.i(TAG, "onCreate: " + id);
+//        Log.i(TAG, "onCreate: " + id);
 
         Amplify.API.query(
                 ModelQuery.get(TeamModel.class, id),
@@ -114,7 +114,7 @@ public class Settings extends AppCompatActivity {
         if(username !=null){
             ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
             ((EditText) findViewById(R.id.editTextTextUserName)).setText(username);
-            Log.i("settings", username);
+//            Log.i("settings", username);
         }
 
         SharedPreferences preferencesTeam = getSharedPreferences("teamdetails", MODE_PRIVATE);
@@ -122,7 +122,7 @@ public class Settings extends AppCompatActivity {
         if(teamname !=null){
             ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
             ((EditText) findViewById(R.id.editTextTextTeamName)).setText(username);
-            Log.i("settings", teamname);
+//            Log.i("settings", teamname);
         }
     }
 }

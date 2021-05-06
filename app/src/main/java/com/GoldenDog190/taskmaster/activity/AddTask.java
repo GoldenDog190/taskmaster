@@ -23,12 +23,14 @@ import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.models.TaskModel;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -37,6 +39,7 @@ public class AddTask extends AppCompatActivity {
     Integer count = 0;
     TaskDatabase taskDatabase;
     Handler mainThreadHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +52,42 @@ public class AddTask extends AppCompatActivity {
 
         List<TeamModel> teams = new ArrayList<>();
 
+        Handler handler = new Handler(getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg){
+                super.handleMessage(msg);
+                if (msg.what == 2) {
+                    Spinner spinner = findViewById(R.id.spinner);
+                    ArrayAdapter<TeamModel>  aAT = new ArrayAdapter<>(
+                            AddTask.this, android.R.layout.simple_spinner_dropdown_item, teams);
+                    aAT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(aAT);
+                }
+            }
+        };
 
-//        Handler handler = new Handler(getMainLooper()){
-//            @Override
-//            public void handleMessage(@NonNull Message msg){
-//                super.handleMessage(msg);
-//                if (msg.what == 2) {
-//                    Spinner spinner = findViewById(R.id.spinner);
-//                    ArrayAdapter<TeamModel>  aAT = new ArrayAdapter<>(
-//                            getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
-//                    aAT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    spinner.setAdapter(aAT);
-//                }
-//            }
-//        };
+        Amplify.API.query(
+                ModelQuery.list(TeamModel.class),
+
+                r -> { //Log.i(TAG,  r.toString());
+                    for(TeamModel t : r.getData()){
+
+                        teams.add(t);
+                    }
+                    handler.sendEmptyMessage(2);
+                },
+                r -> {//Log.i(TAG,"issue");
+                }
+        );
+
+//        TeamModel newTeam = TeamModel.builder()
+//                .name("Team A")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTeam),
+//                response -> Log.i(TAG, "onCreate: task made successfully"),
+//                response -> Log.i(TAG, response.toString())
+//        );
 
 
 
@@ -78,46 +103,26 @@ public class AddTask extends AppCompatActivity {
 
             String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
 
-//            Task task = Task.builder()
-//                    .title(title)
-//                    .body(body)
-//                    .assigned(assigned)
-//                    .build();
+//            String name = ((Spinner)findViewById(R.id.spinner)).getTransitionName().toString();
 
-//            Amplify.API.mutate(
-//                    ModelMutation.create(task),
-//                    response -> {
-//                        Log.i(TAG, "onCreate: successfully added");
-//                    },
-//                    response -> {
-//                        Log.i(TAG, "onCreate: failed to save");
-//                    }
-//            );
 
             TeamModel newTaskModel = TeamModel.builder()
+                    .name("Team")
                     .title(title)
                     .body(body)
                     .assigned(assigned)
                     .build();
             Amplify.API.mutate(
                     ModelMutation.create(newTaskModel),
-                    response -> Log.i(TAG, "onCreate: task made successfully"),
-                    response -> Log.i(TAG, response.toString())
+                    response -> {
+                        //Log.i(TAG, "onCreate: task made successfully");
+                    },
+                    response -> {
+                        //Log.i(TAG, response.toString());
+                    }
             );
 
-            Handler handler = new Handler(getMainLooper()){
-                @Override
-                public void handleMessage(@NonNull Message msg){
-                    super.handleMessage(msg);
-                    if (msg.what == 2) {
-                        Spinner spinner = findViewById(R.id.spinner);
-                        ArrayAdapter<TeamModel>  aAT = new ArrayAdapter<>(
-                                getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, teams);
-                        aAT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(aAT);
-                    }
-                }
-            };
+
 
 
             //Save a TaskModel
@@ -125,7 +130,7 @@ public class AddTask extends AppCompatActivity {
 //            taskDatabase.taskModelDoa().insert(taskModel);
 
             Intent intent = new Intent(AddTask.this, TaskDetail.class);
-//            intent.putExtra("name", name);
+            intent.putExtra("name", "team");
             intent.putExtra("task", title);
             intent.putExtra("body", body);
             intent.putExtra("assigned", assigned);

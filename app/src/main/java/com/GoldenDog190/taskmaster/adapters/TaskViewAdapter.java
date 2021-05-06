@@ -47,7 +47,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
         holder.itemView.setOnClickListener(v -> {
             clickOnTaskAble.handleClickOnTask(holder);
-            Log.i(TAG, "clicked on fragment");
+//            Log.i(TAG, "clicked on fragment");
 
         });
     }

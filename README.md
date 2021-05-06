@@ -142,6 +142,6 @@
         - First I set up my account, and put taskmaster as the name for the app on the Google Play Console.
         - I then added my email as one of the testers, and then managed my app signing.
         -
-        - taskmaster app link: 
+        - taskmaster app link:
     * Screenshots
         - 
