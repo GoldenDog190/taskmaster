@@ -81,7 +81,7 @@ public class Settings extends AppCompatActivity {
 
         Button saveButtonTwo = findViewById(R.id.saveButton2);
 
-        ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("teamname", ""));
+        ((TextView) findViewById(R.id.textViewTeamName)).setText(sharedPreferences.getString("teamname", ""));
         saveButtonTwo.setOnClickListener(view -> {
 //            String teamnameInput = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
 
@@ -98,7 +98,7 @@ public class Settings extends AppCompatActivity {
                     r -> {}
             );
 
-            ((TextView)findViewById(R.id.settingsTextViewName)).setText(teamname);
+            ((TextView)findViewById(R.id.textViewTeamName)).setText(teamname);
             editor.putString("teamname", teamname);
             editor.apply();
         });
