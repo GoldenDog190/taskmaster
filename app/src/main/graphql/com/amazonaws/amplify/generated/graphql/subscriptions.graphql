@@ -1,91 +1,22 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTask {
-  onCreateTask {
-    id
-    title
-    body
-    assigned
-    teamModels {
-      items {
-        id
-        teamModelId
-        name
-        title
-        body
-        assigned
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateTask {
-  onUpdateTask {
-    id
-    title
-    body
-    assigned
-    teamModels {
-      items {
-        id
-        teamModelId
-        name
-        title
-        body
-        assigned
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteTask {
-  onDeleteTask {
-    id
-    title
-    body
-    assigned
-    teamModels {
-      items {
-        id
-        teamModelId
-        name
-        title
-        body
-        assigned
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateTeamModel {
   onCreateTeamModel {
     id
-    teamModelId
     name
     title
     body
     assigned
-    task {
-      id
-      title
-      body
-      assigned
-      teamModels {
-        nextToken
+    teamModels {
+      items {
+        id
+        teamModelId
+        title
+        body
+        assigned
+        createdAt
+        updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
     createdAt
     updatedAt
@@ -94,13 +25,59 @@ subscription OnCreateTeamModel {
 subscription OnUpdateTeamModel {
   onUpdateTeamModel {
     id
-    teamModelId
     name
+    title
+    body
+    assigned
+    teamModels {
+      items {
+        id
+        teamModelId
+        title
+        body
+        assigned
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTeamModel {
+  onDeleteTeamModel {
+    id
+    name
+    title
+    body
+    assigned
+    teamModels {
+      items {
+        id
+        teamModelId
+        title
+        body
+        assigned
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTask {
+  onCreateTask {
+    id
+    teamModelId
     title
     body
     assigned
     task {
       id
+      name
       title
       body
       assigned
@@ -114,16 +91,39 @@ subscription OnUpdateTeamModel {
     updatedAt
   }
 }
-subscription OnDeleteTeamModel {
-  onDeleteTeamModel {
+subscription OnUpdateTask {
+  onUpdateTask {
     id
     teamModelId
-    name
     title
     body
     assigned
     task {
       id
+      name
+      title
+      body
+      assigned
+      teamModels {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTask {
+  onDeleteTask {
+    id
+    teamModelId
+    title
+    body
+    assigned
+    task {
+      id
+      name
       title
       body
       assigned

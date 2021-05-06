@@ -30,18 +30,18 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-//        Task[] task = new Task[1];
-//        List<TeamModel> teamModels = new ArrayList<>();
+
+        List<TeamModel> teamModels = new ArrayList<>();
 
       String id = getIntent().getStringExtra("teamModelId");
         Log.i(TAG, "onCreate: " + id);
 
-//        Amplify.API.query(
-//                ModelQuery.get(TeamModel.class, id),
-//                r -> {},
-//
-//                r -> {}
-//        );
+        Amplify.API.query(
+                ModelQuery.get(TeamModel.class, id),
+                r -> {},
+
+                r -> {}
+        );
 
 
 
@@ -63,17 +63,16 @@ public class Settings extends AppCompatActivity {
 
             String username = ((EditText)findViewById(R.id.editTextTextUserName)).getText().toString();
 
-//            TeamModel tm = TeamModel.builder()
-//                    .task(task[0])
-//                    .name(username)
-//                    .build();
-//            teamModels.add(tm);
+            TeamModel tm = TeamModel.builder()
+                    .name(username)
+                    .build();
+            teamModels.add(tm);
 
-//            Amplify.API.mutate(
-//                    ModelMutation.create(tm),
-//                    r -> {},
-//                    r -> {}
-//            );
+            Amplify.API.mutate(
+                    ModelMutation.create(tm),
+                    r -> {},
+                    r -> {}
+            );
 
             ((TextView)findViewById(R.id.settingsTextViewName)).setText(username);
             editor.putString("username", username);
@@ -88,17 +87,16 @@ public class Settings extends AppCompatActivity {
 
             String teamname = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
 
-//            TeamModel tm = TeamModel.builder()
-//                    .task(task[0])
-//                    .name(teamname)
-//                    .build();
-//            teamModels.add(tm);
+            TeamModel tm = TeamModel.builder()
+                    .name(teamname)
+                    .build();
+            teamModels.add(tm);
 
-//            Amplify.API.mutate(
-//                    ModelMutation.create(tm),
-//                    r -> {},
-//                    r -> {}
-//            );
+            Amplify.API.mutate(
+                    ModelMutation.create(tm),
+                    r -> {},
+                    r -> {}
+            );
 
             ((TextView)findViewById(R.id.settingsTextViewName)).setText(teamname);
             editor.putString("teamname", teamname);

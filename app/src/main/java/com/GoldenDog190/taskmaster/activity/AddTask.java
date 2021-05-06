@@ -44,8 +44,9 @@ public class AddTask extends AppCompatActivity {
 //        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
 //                .allowMainThreadQueries()
 //                .build();
-        Task[] task = new Task[1];
+//        Task[] task = new Task[1];
         List<TeamModel> team = new ArrayList<>();
+//        List<Task> taskModel = new ArrayList<>();
 
         mainThreadHandler = new Handler(this.getMainLooper()) {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -106,35 +107,30 @@ public class AddTask extends AppCompatActivity {
 
             String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
 
-            TeamModel taskModel = TeamModel.builder()
-                    .task(task[0])
-                    .title(title)
-                    .body(body)
-                    .assigned(assigned)
-                    .build();
-
-            Amplify.API.mutate(
-                    ModelMutation.create(taskModel),
-                    response -> {
-                        Log.i(TAG, "onCreate: successfully added");
-                    },
-                    response -> {
-                        Log.i(TAG, "onCreate: failed to save");
-                    }
-            );
-
-//            TeamModel newTaskModel = TeamModel.builder()
-//                    .task(task[0])
-//                    .name("Team A")
-//                    .title("task: homework")
-//                    .body("Work on lab")
-//                    .assigned("today")
+//            Task task = Task.builder()
+//                    .title(title)
+//                    .body(body)
+//                    .assigned(assigned)
 //                    .build();
+
 //            Amplify.API.mutate(
-//                    ModelMutation.create(newTaskModel),
-//                    response -> Log.i(TAG, "onCreate: task made successfully"),
-//                    response -> Log.i(TAG, response.toString())
+//                    ModelMutation.create(task),
+//                    response -> {
+//                        Log.i(TAG, "onCreate: successfully added");
+//                    },
+//                    response -> {
+//                        Log.i(TAG, "onCreate: failed to save");
+//                    }
 //            );
+
+            TeamModel newTaskModel = TeamModel.builder()
+                    .name("Team A")
+                    .build();
+            Amplify.API.mutate(
+                    ModelMutation.create(newTaskModel),
+                    response -> Log.i(TAG, "onCreate: task made successfully"),
+                    response -> Log.i(TAG, response.toString())
+            );
 //
 //            TeamModel newTaskModelTwo = TeamModel.builder()
 //                    .task(task[0])

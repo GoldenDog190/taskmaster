@@ -1,6 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,20 +19,18 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the TeamModel type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "TeamModels")
-@Index(name = "byTeam", fields = {"teamModelId"})
 public final class TeamModel implements Model {
   public static final QueryField ID = field("TeamModel", "id");
   public static final QueryField NAME = field("TeamModel", "name");
   public static final QueryField TITLE = field("TeamModel", "title");
   public static final QueryField BODY = field("TeamModel", "body");
   public static final QueryField ASSIGNED = field("TeamModel", "assigned");
-  public static final QueryField TASK = field("TeamModel", "teamModelId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   public final @ModelField(targetType="String") String name;
   public final @ModelField(targetType="String") String title;
   public final @ModelField(targetType="String") String body;
   public final @ModelField(targetType="String") String assigned;
-  private final @ModelField(targetType="Task", isRequired = true) @BelongsTo(targetName = "teamModelId", type = Task.class) Task task;
+  public final @ModelField(targetType="Task") @HasMany(associatedWith = "task", type = Task.class) List<Task> teamModels = null;
   public String getId() {
       return id;
   }
@@ -53,17 +51,16 @@ public final class TeamModel implements Model {
       return assigned;
   }
   
-  public Task getTask() {
-      return task;
+  public List<Task> getTeamModels() {
+      return teamModels;
   }
   
-  private TeamModel(String id, String name, String title, String body, String assigned, Task task) {
+  private TeamModel(String id, String name, String title, String body, String assigned) {
     this.id = id;
     this.name = name;
     this.title = title;
     this.body = body;
     this.assigned = assigned;
-    this.task = task;
   }
   
   @Override
@@ -78,8 +75,7 @@ public final class TeamModel implements Model {
               ObjectsCompat.equals(getName(), teamModel.getName()) &&
               ObjectsCompat.equals(getTitle(), teamModel.getTitle()) &&
               ObjectsCompat.equals(getBody(), teamModel.getBody()) &&
-              ObjectsCompat.equals(getAssigned(), teamModel.getAssigned()) &&
-              ObjectsCompat.equals(getTask(), teamModel.getTask());
+              ObjectsCompat.equals(getAssigned(), teamModel.getAssigned());
       }
   }
   
@@ -91,7 +87,6 @@ public final class TeamModel implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getAssigned())
-      .append(getTask())
       .toString()
       .hashCode();
   }
@@ -104,13 +99,12 @@ public final class TeamModel implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
-      .append("assigned=" + String.valueOf(getAssigned()) + ", ")
-      .append("task=" + String.valueOf(getTask()))
+      .append("assigned=" + String.valueOf(getAssigned()))
       .append("}")
       .toString();
   }
   
-  public static TaskStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -138,7 +132,6 @@ public final class TeamModel implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -148,14 +141,8 @@ public final class TeamModel implements Model {
       name,
       title,
       body,
-      assigned,
-      task);
+      assigned);
   }
-  public interface TaskStep {
-    BuildStep task(Task task);
-  }
-  
-
   public interface BuildStep {
     TeamModel build();
     BuildStep id(String id) throws IllegalArgumentException;
@@ -166,9 +153,8 @@ public final class TeamModel implements Model {
   }
   
 
-  public static class Builder implements TaskStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private Task task;
     private String name;
     private String title;
     private String body;
@@ -182,15 +168,7 @@ public final class TeamModel implements Model {
           name,
           title,
           body,
-          assigned,
-          task);
-    }
-    
-    @Override
-     public BuildStep task(Task task) {
-//        Objects.requireNonNull(task);
-        this.task = task;
-        return this;
+          assigned);
     }
     
     @Override
@@ -240,18 +218,12 @@ public final class TeamModel implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String title, String body, String assigned, Task task) {
+    private CopyOfBuilder(String id, String name, String title, String body, String assigned) {
       super.id(id);
-      super.task(task)
-        .name(name)
+      super.name(name)
         .title(title)
         .body(body)
         .assigned(assigned);
-    }
-    
-    @Override
-     public CopyOfBuilder task(Task task) {
-      return (CopyOfBuilder) super.task(task);
     }
     
     @Override

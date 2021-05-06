@@ -3,23 +3,18 @@ package com.GoldenDog190.taskmaster.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
-import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.GoldenDog190.taskmaster.adapters.TeamAdapter;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
-import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +98,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //    }
 
     @Override
-    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
+    public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder) {
 
     }
 }

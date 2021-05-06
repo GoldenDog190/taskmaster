@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,9 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
-import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.GoldenDog190.taskmaster.adapters.TeamAdapter;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -30,8 +28,6 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TeamModel;
-import com.amplifyframework.datastore.generated.model.Todo;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
-//    public List<Todo> taskModel = new ArrayList<>();
+//    public List<Task> task = new ArrayList<>();
     Handler mainThreadHandler;
 
     @Override
@@ -51,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Task[] task = new Task[1];
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -75,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                 if (msg.what == 1) {
                     StringJoiner sj = new StringJoiner(", ");
                     for (TeamModel task : taskModel) {
-                        sj.add(task.getTitle());
+                        sj.add(task.getName());
                     }
 
                     rv.getAdapter().notifyDataSetChanged();
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         };
 
 //============================Lab 32====================================
-        //        Todo newTaskModel = Todo.builder()
+//                Task newTaskModel = Task.builder()
 //                .title("task: homework")
 //                .body("Work on lab")
 //                .assigned("today")
@@ -97,31 +92,26 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //=============================================================
 
 //========================Lab 33====================================
-//        TeamModel newTaskModel = TeamModel.builder()
-//                .task(task[0])
-//                .name("Team A")
-//                .title("task: homework")
-//                .body("Work on lab")
-//                .assigned("today")
-//                .build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTaskModel),
-//                response -> Log.i(TAG, "onCreate: task made successfully"),
-//                response -> Log.i(TAG, response.toString())
-//        );
+        TeamModel newTaskModel = TeamModel.builder()
+                .name("Team A")
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newTaskModel),
+                response -> Log.i(TAG, "onCreate: task made successfully"),
+                response -> Log.i(TAG, response.toString())
+        );
 //
-//        TeamModel newTaskModelTwo = TeamModel.builder()
-//                .task(task[0])
-//                .name("Team B")
-//                .title("task: exercise")
-//                .body("Run 10 laps")
-//                .assigned("tommorrow")
-//                .build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTaskModelTwo),
-//                response -> Log.i(TAG, "onCreate: task made successfully"),
-//                response -> Log.i(TAG, response.toString())
-//        );
+        TeamModel newTaskModelTwo = TeamModel.builder()
+                .name("Team B")
+                .title("task: exercise")
+                .body("Run 10 laps")
+                .assigned("tommorrow")
+                .build();
+        Amplify.API.mutate(
+                ModelMutation.create(newTaskModelTwo),
+                response -> Log.i(TAG, "onCreate: task made successfully"),
+                response -> Log.i(TAG, response.toString())
+        );
 //
 //        TeamModel newTaskModelThree = TeamModel.builder()
 //                .task(task[0])
@@ -262,10 +252,10 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //    }
 
     @Override
-    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
+    public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder) {
         TeamModel taskModel = taskModelViewHolder.taskModel;
         Intent intent = new Intent(MainActivity.this, TaskDetail.class);
         MainActivity.this.startActivity(intent);
-        Log.i(TAG, "task " + taskModel.body);
+        Log.i(TAG, "task " + taskModel.name);
     }
 }
