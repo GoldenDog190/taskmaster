@@ -3,6 +3,7 @@
 * It also has a settings page where you can save your username, and a task detail page where you can look at your tasks in more detail.
 * It also has clickable tasks listed on the home page.
 * Add a task on the add task page, and it will be added to a list of tasks on the home page and on the task detail page.
+* Can add team name on the settings page, and add can choose what team a task belongs to.
 
 ## Daily Change Log:
 
@@ -111,5 +112,20 @@
         * Refactor your homepage’s RecyclerView to display all Task entities in DynamoDB.
     * Screenshots
       - ![Home Page](screenshots/home-page-version-6.jpeg)
-      - ![Task Detail Page](screenshots/973EE032-F832-483C-8FA0-A1759D28C841.jpeg)
+      - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
       - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
+
+### Day 7 - Lab 33 Related Data
+    * Feature Tasks
+       - Tasks Are Owned By Teams
+         * Create a second entity for a team, which has a name and a list of tasks. Update your tasks to be owned by a team.
+         * Manually create three teams by running a mutation exactly three times in your code. (You do NOT need to allow the user to create new teams.)
+       - Add Task Form
+         * Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.
+       - Settings Page
+         * In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
+    * Screenshots
+        - ![Settings Page](screenshots/settings-version-4.jpeg)
+        - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
+        - ![Home Page](screenshots/home-page-version-7.jpeg)
+

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.models.TaskModel;
+import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.List;
@@ -19,9 +20,10 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
     static String TAG = "GoldenDog190.TaskViewAdapter";
 //    public TaskListener listener;
     public ClickOnTaskAble clickOnTaskAble;
-    List<Todo> taskModelList;
+//    List<Todo> taskModelList;
+    List<TeamModel> taskModelList;
 
-    public TaskViewAdapter(List<Todo> taskModelList, ClickOnTaskAble listener){
+    public TaskViewAdapter(List<TeamModel> taskModelList, ClickOnTaskAble listener){
         this.taskModelList = taskModelList;
        this.clickOnTaskAble = listener;
     }
@@ -40,7 +42,8 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
     public void onBindViewHolder(@NonNull TaskModelViewHolder holder, int position) {
         holder.taskModel = taskModelList.get(position);
         ((TextView)holder.itemView.findViewById(R.id.textViewTaskItem))
-                .setText(taskModelList.get(position).title + " "
+                .setText( taskModelList.get(position).name + " "
+                        + taskModelList.get(position).title + " "
                         + taskModelList.get(position).body + " "
                         + taskModelList.get(position).assigned);
 
@@ -63,7 +66,8 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
     public class TaskModelViewHolder extends RecyclerView.ViewHolder {
 //        public String design;
-        public Todo taskModel;
+//        public Todo taskModel;
+        public TeamModel taskModel;
         public int position;
         public TaskModelViewHolder(@NonNull View itemView){
             super(itemView);

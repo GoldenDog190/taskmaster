@@ -20,18 +20,18 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="100dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextTeamName" />
 
     <EditText
         android:id="@+id/editTextTextUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="136dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/username"
@@ -48,8 +48,22 @@
         android:text="@string/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/saveButton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/saveButton"
         app:layout_constraintTop_toBottomOf="@+id/saveButton"
         app:layout_constraintVertical_bias="0.27" />
+
+    <EditText
+        android:id="@+id/editTextTextTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/team_name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextUserName"
+        android:autofillHints="" />
 </androidx.constraintlayout.widget.ConstraintLayout>

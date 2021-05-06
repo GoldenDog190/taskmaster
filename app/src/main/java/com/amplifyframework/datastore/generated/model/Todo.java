@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,12 +25,11 @@ public final class Todo implements Model {
   public static final QueryField BODY = field("Todo", "body");
   public static final QueryField ASSIGNED = field("Todo", "assigned");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  public final @ModelField(targetType="String") String title;
-  public final @ModelField(targetType="String") String body;
-  public final @ModelField(targetType="String") String assigned;
-
-
-    public String getId() {
+  private final @ModelField(targetType="String") String title;
+  private final @ModelField(targetType="String") String body;
+  private final @ModelField(targetType="String") String assigned;
+  private final @ModelField(targetType="TeamModel") @HasMany(associatedWith = "todo", type = TeamModel.class) List<TeamModel> teamModels = null;
+  public String getId() {
       return id;
   }
   
@@ -43,6 +43,10 @@ public final class Todo implements Model {
   
   public String getAssigned() {
       return assigned;
+  }
+  
+  public List<TeamModel> getTeamModels() {
+      return teamModels;
   }
   
   private Todo(String id, String title, String body, String assigned) {
