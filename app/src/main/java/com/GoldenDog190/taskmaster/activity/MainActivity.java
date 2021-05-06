@@ -20,13 +20,11 @@ import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.adapters.TeamAdapter;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 
 import java.util.ArrayList;
@@ -252,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //    }
 
     @Override
-    public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder) {
+    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
         TeamModel taskModel = taskModelViewHolder.taskModel;
         Intent intent = new Intent(MainActivity.this, TaskDetail.class);
         MainActivity.this.startActivity(intent);

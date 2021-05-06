@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.GoldenDog190.taskmaster.R;
-import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
     static String TAG = "GoldenDog190.TaskViewAdapter";
 //    public TaskListener listener;
     public ClickOnTaskAble clickOnTaskAble;
-    List<Task> taskModelList;
+    List<TeamModel> taskModelList;
 //    List<TeamModel> taskModelList;
 
     public TaskViewAdapter(List<TeamModel> taskModelList, ClickOnTaskAble listener){
@@ -65,7 +64,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
 
     public class TaskModelViewHolder extends RecyclerView.ViewHolder {
 //        public String design;
-        public Task taskModel;
+        public TeamModel taskModel;
 //        public TeamModel taskModel;
         public int position;
         public TaskModelViewHolder(@NonNull View itemView){
@@ -75,7 +74,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
     }
 
     public interface ClickOnTaskAble {
-        public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder);
+        public void handleClickOnTask(TaskModelViewHolder taskModelViewHolder);
     }
 
 }

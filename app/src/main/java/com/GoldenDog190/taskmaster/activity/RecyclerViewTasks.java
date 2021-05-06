@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.adapters.TeamAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class RecyclerViewTasks extends AppCompatActivity implements TaskViewAdap
     }
 
     @Override
-    public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder) {
+    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
 
 
     }

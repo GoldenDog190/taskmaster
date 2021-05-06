@@ -131,6 +131,16 @@
 
 ### Day 8 - Lab 34 Play Store
     * Feature Tasks
-       -
+       - App Polish
+         * Ensure that your application follows Google’s guidelines.
+         Build Final APK
+         Build an APK for your application. Include that APK in your GitHub repo.
+
+         Deployment to Play Store
+         Note that becoming a developer with Google requires a one-time fee of $25. This is almost certainly worth it for the resume boost alone, but you may also partner up with a classmate to go through these steps.
+
+         In the Google Play Console, follow the checklist for uploading your app to the Play Store. Include any notes about this process in your README, as well as the link to where your application will one day live.
+
+
     * Screenshots
         - 

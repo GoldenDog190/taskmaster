@@ -11,7 +11,6 @@ import android.widget.Button;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.adapters.TeamAdapter;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
@@ -98,7 +97,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //    }
 
     @Override
-    public void handleClickOnTask(TeamAdapter.TeamViewHolder taskModelViewHolder) {
+    public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
 
     }
 }

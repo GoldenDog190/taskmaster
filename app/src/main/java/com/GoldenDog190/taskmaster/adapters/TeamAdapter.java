@@ -35,21 +35,21 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
-        holder.teamModel = teamModelList.get(position);
-        ((TextView)holder.itemView.findViewById(R.id.textViewTaskItem))
-                .setText(
-                teamModelList.get(position).name + " "
-                        + teamModelList.get(position).title + " "
-                        + teamModelList.get(position).body + " "
-                        + teamModelList.get(position).assigned
-                       );
-
-        holder.itemView.setOnClickListener(v -> {
-            clickOnTaskAble.handleClickOnTask(holder);
-            Log.i(TAG, "clicked on fragment");
-
-        }
-        );
+//        holder.teamModel = teamModelList.get(position);
+//        ((TextView)holder.itemView.findViewById(R.id.textViewTaskItem))
+//                .setText(
+//                teamModelList.get(position).name + " "
+//                        + teamModelList.get(position).title + " "
+//                        + teamModelList.get(position).body + " "
+//                        + teamModelList.get(position).assigned
+//                       );
+//
+//        holder.itemView.setOnClickListener(v -> {
+//            clickOnTaskAble.handleClickOnTask(holder);
+//            Log.i(TAG, "clicked on fragment");
+//
+//        }
+//        );
     }
 
 
