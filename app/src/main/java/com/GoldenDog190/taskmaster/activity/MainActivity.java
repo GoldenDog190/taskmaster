@@ -28,6 +28,8 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.datastore.generated.model.Todo;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,13 +42,15 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     public static String TAG = "GoldenDog190.MainActivity";
 //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
-    public List<Todo> taskModel = new ArrayList<>();
+    public List<TeamModel> taskModel = new ArrayList<>();
     Handler mainThreadHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Task[] task = new Task[1];
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -69,36 +73,62 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                 Log.i(TAG, "handleMessage: hit second handler");
                 if (msg.what == 1) {
                     StringJoiner sj = new StringJoiner(", ");
-                    for (Todo task : taskModel) {
+                    for (TeamModel task : taskModel) {
                         sj.add(task.getTitle());
                     }
-//                    (() findViewById(R.id.taskRecycleView)).setText(sj.toString());
+
                     rv.getAdapter().notifyDataSetChanged();
                 }
             }
         };
 
 
-
-
-        Todo newTaskModel = Todo.builder()
-                .title("task: homework")
-                .body("Work on lab")
-                .assigned("today")
-                .build();
-        Amplify.API.mutate(
-                ModelMutation.create(newTaskModel),
-                response -> Log.i(TAG, "onCreate: task made successfully"),
-                response -> Log.i(TAG, response.toString())
-        );
+//        TeamModel newTaskModel = TeamModel.builder()
+//                .task(task[0])
+//                .name("Team A")
+//                .title("task: homework")
+//                .body("Work on lab")
+//                .assigned("today")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTaskModel),
+//                response -> Log.i(TAG, "onCreate: task made successfully"),
+//                response -> Log.i(TAG, response.toString())
+//        );
+//
+//        TeamModel newTaskModelTwo = TeamModel.builder()
+//                .task(task[0])
+//                .name("Team B")
+//                .title("task: exercise")
+//                .body("Run 10 laps")
+//                .assigned("tommorrow")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTaskModelTwo),
+//                response -> Log.i(TAG, "onCreate: task made successfully"),
+//                response -> Log.i(TAG, response.toString())
+//        );
+//
+//        TeamModel newTaskModelThree = TeamModel.builder()
+//                .task(task[0])
+//                .name("Team A")
+//                .title("task: homework")
+//                .body("Work on lab")
+//                .assigned("today")
+//                .build();
+//        Amplify.API.mutate(
+//                ModelMutation.create(newTaskModelThree),
+//                response -> Log.i(TAG, "onCreate: task made successfully"),
+//                response -> Log.i(TAG, response.toString())
+//        );
 
         Amplify.API.query(
-                ModelQuery.list(Todo.class),
+                ModelQuery.list(TeamModel.class),
                 response -> {
 
-                    for (Todo task : response.getData()){
-                        taskModel.add(task);
-                        Log.i(TAG, "task: " + task.getClass());
+                    for (TeamModel tasks : response.getData()){
+                        taskModel.add(tasks);
+                        Log.i(TAG, "task: " + tasks.getClass());
                     }
                     mainThreadHandler.sendEmptyMessage(1);
 
@@ -214,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
     @Override
     public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder) {
-        Todo taskModel = taskModelViewHolder.taskModel;
+        TeamModel taskModel = taskModelViewHolder.taskModel;
         Intent intent = new Intent(MainActivity.this, TaskDetail.class);
         MainActivity.this.startActivity(intent);
         Log.i(TAG, "task " + taskModel.body);

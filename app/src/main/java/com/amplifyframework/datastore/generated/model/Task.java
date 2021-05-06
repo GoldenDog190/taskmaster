@@ -16,19 +16,19 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Todo type in your schema. */
+/** This is an auto generated class representing the Task type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Todos")
-public final class Todo implements Model {
-  public static final QueryField ID = field("Todo", "id");
-  public static final QueryField TITLE = field("Todo", "title");
-  public static final QueryField BODY = field("Todo", "body");
-  public static final QueryField ASSIGNED = field("Todo", "assigned");
+@ModelConfig(pluralName = "Tasks")
+public final class Task implements Model {
+  public static final QueryField ID = field("Task", "id");
+  public static final QueryField TITLE = field("Task", "title");
+  public static final QueryField BODY = field("Task", "body");
+  public static final QueryField ASSIGNED = field("Task", "assigned");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String assigned;
-  private final @ModelField(targetType="TeamModel") @HasMany(associatedWith = "todo", type = TeamModel.class) List<TeamModel> teamModels = null;
+  private final @ModelField(targetType="TeamModel") @HasMany(associatedWith = "task", type = TeamModel.class) List<TeamModel> teamModels = null;
   public String getId() {
       return id;
   }
@@ -49,7 +49,7 @@ public final class Todo implements Model {
       return teamModels;
   }
   
-  private Todo(String id, String title, String body, String assigned) {
+  private Task(String id, String title, String body, String assigned) {
     this.id = id;
     this.title = title;
     this.body = body;
@@ -63,11 +63,11 @@ public final class Todo implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Todo todo = (Todo) obj;
-      return ObjectsCompat.equals(getId(), todo.getId()) &&
-              ObjectsCompat.equals(getTitle(), todo.getTitle()) &&
-              ObjectsCompat.equals(getBody(), todo.getBody()) &&
-              ObjectsCompat.equals(getAssigned(), todo.getAssigned());
+      Task task = (Task) obj;
+      return ObjectsCompat.equals(getId(), task.getId()) &&
+              ObjectsCompat.equals(getTitle(), task.getTitle()) &&
+              ObjectsCompat.equals(getBody(), task.getBody()) &&
+              ObjectsCompat.equals(getAssigned(), task.getAssigned());
       }
   }
   
@@ -85,7 +85,7 @@ public final class Todo implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Todo {")
+      .append("Task {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
@@ -107,7 +107,7 @@ public final class Todo implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Todo justId(String id) {
+  public static Task justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -117,7 +117,7 @@ public final class Todo implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Todo(
+    return new Task(
       id,
       null,
       null,
@@ -132,7 +132,7 @@ public final class Todo implements Model {
       assigned);
   }
   public interface BuildStep {
-    Todo build();
+    Task build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep title(String title);
     BuildStep body(String body);
@@ -146,10 +146,10 @@ public final class Todo implements Model {
     private String body;
     private String assigned;
     @Override
-     public Todo build() {
+     public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Todo(
+        return new Task(
           id,
           title,
           body,

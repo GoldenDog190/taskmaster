@@ -7,12 +7,13 @@ import androidx.room.PrimaryKey;
 public class TaskModel {
     @PrimaryKey(autoGenerate = true)
     public Long id;
-
+    public String name;
     public String title;
     public String body;
     public String assigned;
 
     public TaskModel(String title, String body, String assigned){
+        this.name =name;
         this.title = title;
         this.body = body;
         this.assigned = assigned;

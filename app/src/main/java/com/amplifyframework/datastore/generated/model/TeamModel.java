@@ -1,6 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasMany;
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,21 +16,29 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Todo type in your schema. */
+/** This is an auto generated class representing the TeamModel type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Todos")
-public final class Todo implements Model {
-  public static final QueryField ID = field("Todo", "id");
-  public static final QueryField TITLE = field("Todo", "title");
-  public static final QueryField BODY = field("Todo", "body");
-  public static final QueryField ASSIGNED = field("Todo", "assigned");
+@ModelConfig(pluralName = "TeamModels")
+@Index(name = "byTeam", fields = {"teamModelId"})
+public final class TeamModel implements Model {
+  public static final QueryField ID = field("TeamModel", "id");
+  public static final QueryField NAME = field("TeamModel", "name");
+  public static final QueryField TITLE = field("TeamModel", "title");
+  public static final QueryField BODY = field("TeamModel", "body");
+  public static final QueryField ASSIGNED = field("TeamModel", "assigned");
+  public static final QueryField TASK = field("TeamModel", "teamModelId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String") String title;
-  private final @ModelField(targetType="String") String body;
-  private final @ModelField(targetType="String") String assigned;
-  private final @ModelField(targetType="TeamModel") @HasMany(associatedWith = "todo", type = TeamModel.class) List<TeamModel> teamModels = null;
+  public final @ModelField(targetType="String") String name;
+  public final @ModelField(targetType="String") String title;
+  public final @ModelField(targetType="String") String body;
+  public final @ModelField(targetType="String") String assigned;
+  private final @ModelField(targetType="Task", isRequired = true) @BelongsTo(targetName = "teamModelId", type = Task.class) Task task;
   public String getId() {
       return id;
+  }
+  
+  public String getName() {
+      return name;
   }
   
   public String getTitle() {
@@ -45,15 +53,17 @@ public final class Todo implements Model {
       return assigned;
   }
   
-  public List<TeamModel> getTeamModels() {
-      return teamModels;
+  public Task getTask() {
+      return task;
   }
   
-  private Todo(String id, String title, String body, String assigned) {
+  private TeamModel(String id, String name, String title, String body, String assigned, Task task) {
     this.id = id;
+    this.name = name;
     this.title = title;
     this.body = body;
     this.assigned = assigned;
+    this.task = task;
   }
   
   @Override
@@ -63,11 +73,13 @@ public final class Todo implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Todo todo = (Todo) obj;
-      return ObjectsCompat.equals(getId(), todo.getId()) &&
-              ObjectsCompat.equals(getTitle(), todo.getTitle()) &&
-              ObjectsCompat.equals(getBody(), todo.getBody()) &&
-              ObjectsCompat.equals(getAssigned(), todo.getAssigned());
+      TeamModel teamModel = (TeamModel) obj;
+      return ObjectsCompat.equals(getId(), teamModel.getId()) &&
+              ObjectsCompat.equals(getName(), teamModel.getName()) &&
+              ObjectsCompat.equals(getTitle(), teamModel.getTitle()) &&
+              ObjectsCompat.equals(getBody(), teamModel.getBody()) &&
+              ObjectsCompat.equals(getAssigned(), teamModel.getAssigned()) &&
+              ObjectsCompat.equals(getTask(), teamModel.getTask());
       }
   }
   
@@ -75,9 +87,11 @@ public final class Todo implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getName())
       .append(getTitle())
       .append(getBody())
       .append(getAssigned())
+      .append(getTask())
       .toString()
       .hashCode();
   }
@@ -85,16 +99,18 @@ public final class Todo implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Todo {")
+      .append("TeamModel {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("name=" + String.valueOf(getName()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
-      .append("assigned=" + String.valueOf(getAssigned()))
+      .append("assigned=" + String.valueOf(getAssigned()) + ", ")
+      .append("task=" + String.valueOf(getTask()))
       .append("}")
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static TaskStep builder() {
       return new Builder();
   }
   
@@ -107,7 +123,7 @@ public final class Todo implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Todo justId(String id) {
+  public static TeamModel justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -117,8 +133,10 @@ public final class Todo implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Todo(
+    return new TeamModel(
       id,
+      null,
+      null,
       null,
       null,
       null
@@ -127,33 +145,58 @@ public final class Todo implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
+      name,
       title,
       body,
-      assigned);
+      assigned,
+      task);
   }
+  public interface TaskStep {
+    BuildStep task(Task task);
+  }
+  
+
   public interface BuildStep {
-    Todo build();
+    TeamModel build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep name(String name);
     BuildStep title(String title);
     BuildStep body(String body);
     BuildStep assigned(String assigned);
   }
   
 
-  public static class Builder implements BuildStep {
+  public static class Builder implements TaskStep, BuildStep {
     private String id;
+    private Task task;
+    private String name;
     private String title;
     private String body;
     private String assigned;
     @Override
-     public Todo build() {
+     public TeamModel build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Todo(
+        return new TeamModel(
           id,
+          name,
           title,
           body,
-          assigned);
+          assigned,
+          task);
+    }
+    
+    @Override
+     public BuildStep task(Task task) {
+//        Objects.requireNonNull(task);
+        this.task = task;
+        return this;
+    }
+    
+    @Override
+     public BuildStep name(String name) {
+        this.name = name;
+        return this;
     }
     
     @Override
@@ -197,11 +240,23 @@ public final class Todo implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String assigned) {
+    private CopyOfBuilder(String id, String name, String title, String body, String assigned, Task task) {
       super.id(id);
-      super.title(title)
+      super.task(task)
+        .name(name)
+        .title(title)
         .body(body)
         .assigned(assigned);
+    }
+    
+    @Override
+     public CopyOfBuilder task(Task task) {
+      return (CopyOfBuilder) super.task(task);
+    }
+    
+    @Override
+     public CopyOfBuilder name(String name) {
+      return (CopyOfBuilder) super.name(name);
     }
     
     @Override

@@ -18,6 +18,7 @@ import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.GoldenDog190.taskmaster.models.TaskModel;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
 public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.TaskDetails";
 //    TaskDatabase taskDatabase;
-            public List<Todo> taskModel = new ArrayList<>();
+            public List<TeamModel> taskModel = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +78,11 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 
 
         Amplify.API.query(
-                ModelQuery.list(Todo.class),
+                ModelQuery.list(TeamModel.class),
                 response -> {
                     Log.i(TAG, "onCreate: success");
 
-                    for(Todo task : response.getData().getItems()) {
+                    for(TeamModel task : response.getData().getItems()) {
                         System.out.println(task.getTitle());
                         Log.i(TAG, "tasks:" + task.getTitle());
                         taskModel.add(task);
