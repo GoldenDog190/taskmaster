@@ -125,7 +125,32 @@
        - Settings Page
          * In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
     * Screenshots
-        - ![Settings Page](screenshots/settings-version-4.jpeg)
-        - ![Add A Task Page](screenshots/add-task-version-3.jpeg)
-        - ![Home Page](screenshots/home-page-version-7.jpeg)
+        - ![Settings Page](screenshots/settings-version-4.png)
+        - ![Add A Task Page](screenshots/add-task-version-3.png)
+        - ![Home Page](screenshots/home-page-version-7.png)
 
+### Day 8 - Lab 34 Play Store
+    * Feature Tasks
+       - App Polish
+         * Ensure that your application follows Google’s guidelines.
+       - Build Final APK
+         * Build an APK for your application. Include that APK in your GitHub repo.
+       - Deployment to Play Store
+         * Note that becoming a developer with Google requires a one-time fee of $25. This is almost certainly worth it for the resume boost alone, but you may also partner up with a classmate to go through these steps.
+         * In the Google Play Console, follow the checklist for uploading your app to the Play Store. Include any notes about this process in your README, as well as the link to where your application will one day live.
+    * Google Play Console
+        - First I set up my account, and put taskmaster as the name for the app on the Google Play Console.
+        - I then added my email as one of the testers, and then managed my app signing.
+        - I then uploaded my app as an aab file because the apk version wasn't working.
+        - Then I set up the app, and went through the steps.
+        - I let Google Play Console know about the content of my app -> app access, ads, content rating, target audience, news apps
+        - Manage how your app is organized and presented -> select an app category and provide contact details and set up store listing
+        - Added screenshots of my app, a free icon from https://icons8.com/icons/set/task, and used a graphic generator https://www.norio.be/graphic-generator/ to make a feature graphic for the app.
+        - I also selected country and region (United States) for the app.
+        - taskmaster app link: https://play.google.com/apps/internaltest/4699196980689052555
+    * Screenshots
+        - ![Home Page](screenshots/home-page-version-8.jpeg)
+        - ![Settings Page](screenshots/settings-version-5.jpeg)
+        - ![Add A Task Page](screenshots/add-task-version-4.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
+        - ![All Tasks Page](screenshots/all-tasks.jpeg)

@@ -3,23 +3,17 @@ package com.GoldenDog190.taskmaster.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
-import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
-import com.GoldenDog190.taskmaster.models.TaskModel;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
-import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,15 +74,15 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
         Amplify.API.query(
                 ModelQuery.list(TeamModel.class),
                 response -> {
-                    Log.i(TAG, "onCreate: success");
+//                    Log.i(TAG, "onCreate: success");
 
                     for(TeamModel task : response.getData().getItems()) {
-                        System.out.println(task.getTitle());
-                        Log.i(TAG, "tasks:" + task.getTitle());
+//                        System.out.println(task.getTitle());
+//                        Log.i(TAG, "tasks:" + task.getTitle());
                         taskModel.add(task);
                     }
                 },
-                    res -> Log.i(TAG, "onCreate: failure" + res.toString())
+                   res ->{} //Log.i(TAG, "onCreate: failure" + res.toString())
         );
                     RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
                     rv.setLayoutManager(new LinearLayoutManager(this));

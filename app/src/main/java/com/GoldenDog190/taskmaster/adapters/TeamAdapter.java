@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder>{
     static String TAG = "GoldenDog190.TeamAdapter";
-
+    public TaskViewAdapter.ClickOnTaskAble clickOnTaskAble;
     List<TeamModel> teamModelList;
 
     public TeamAdapter(List<TeamModel> teamModelList){
@@ -37,22 +37,25 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
 //        holder.teamModel = teamModelList.get(position);
 //        ((TextView)holder.itemView.findViewById(R.id.textViewTaskItem))
-//                .setText( teamModelList.get(position).name + " "
+//                .setText(
+//                teamModelList.get(position).name + " "
 //                        + teamModelList.get(position).title + " "
 //                        + teamModelList.get(position).body + " "
-//                        + teamModelList.get(position).assigned);
-
+//                        + teamModelList.get(position).assigned
+//                       );
+//
 //        holder.itemView.setOnClickListener(v -> {
 //            clickOnTaskAble.handleClickOnTask(holder);
 //            Log.i(TAG, "clicked on fragment");
-
-       // }
+//
+//        }
 //        );
     }
 
 
     static public class TeamViewHolder extends RecyclerView.ViewHolder {
         public TeamModel teamModel;
+        public TeamModel taskModel;
 
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,5 +65,9 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     @Override
     public int getItemCount() {
         return teamModelList.size();
+    }
+
+    public interface ClickOnTaskAble {
+        public void handleClickOnTask(TaskViewAdapter.TaskModelViewHolder taskModelViewHolder);
     }
 }

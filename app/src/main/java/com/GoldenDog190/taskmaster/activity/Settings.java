@@ -30,11 +30,11 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Task[] task = new Task[1];
+
         List<TeamModel> teamModels = new ArrayList<>();
 
       String id = getIntent().getStringExtra("teamModelId");
-        Log.i(TAG, "onCreate: " + id);
+//        Log.i(TAG, "onCreate: " + id);
 
         Amplify.API.query(
                 ModelQuery.get(TeamModel.class, id),
@@ -58,20 +58,13 @@ public class Settings extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("username", ""));
-        ((TextView) findViewById(R.id.settingsTextViewName)).setText(sharedPreferences.getString("teamname", ""));
-
-
         saveButton.setOnClickListener(view -> {
 //            String usernameInput = ((EditText)findViewById(R.id.editTextTextUserName)).getText().toString();
-//            String teamnameInput = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
 
             String username = ((EditText)findViewById(R.id.editTextTextUserName)).getText().toString();
-            String teamname = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
 
             TeamModel tm = TeamModel.builder()
-                    .task(task[0])
                     .name(username)
-                    .name(teamname)
                     .build();
             teamModels.add(tm);
 
@@ -82,8 +75,30 @@ public class Settings extends AppCompatActivity {
             );
 
             ((TextView)findViewById(R.id.settingsTextViewName)).setText(username);
-            ((TextView)findViewById(R.id.settingsTextViewName)).setText(teamname);
             editor.putString("username", username);
+            editor.apply();
+        });
+
+        Button saveButtonTwo = findViewById(R.id.saveButton2);
+
+        ((TextView) findViewById(R.id.textViewTeamName)).setText(sharedPreferences.getString("teamname", ""));
+        saveButtonTwo.setOnClickListener(view -> {
+//            String teamnameInput = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
+
+            String teamname = ((EditText)findViewById(R.id.editTextTextTeamName)).getText().toString();
+
+            TeamModel tm = TeamModel.builder()
+                    .name(teamname)
+                    .build();
+            teamModels.add(tm);
+
+            Amplify.API.mutate(
+                    ModelMutation.create(tm),
+                    r -> {},
+                    r -> {}
+            );
+
+            ((TextView)findViewById(R.id.textViewTeamName)).setText(teamname);
             editor.putString("teamname", teamname);
             editor.apply();
         });
@@ -99,7 +114,7 @@ public class Settings extends AppCompatActivity {
         if(username !=null){
             ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
             ((EditText) findViewById(R.id.editTextTextUserName)).setText(username);
-            Log.i("settings", username);
+//            Log.i("settings", username);
         }
 
         SharedPreferences preferencesTeam = getSharedPreferences("teamdetails", MODE_PRIVATE);
@@ -107,7 +122,7 @@ public class Settings extends AppCompatActivity {
         if(teamname !=null){
             ((TextView) findViewById(R.id.settingsTextViewName)).setText(username);
             ((EditText) findViewById(R.id.editTextTextTeamName)).setText(username);
-            Log.i("settings", teamname);
+//            Log.i("settings", teamname);
         }
     }
 }
