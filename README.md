@@ -141,7 +141,16 @@
     * Google Play Console
         - First I set up my account, and put taskmaster as the name for the app on the Google Play Console.
         - I then added my email as one of the testers, and then managed my app signing.
-        -
-        - taskmaster app link:
+        - I then uploaded my app as an aab file because the apk version wasn't working.
+        - Then I set up the app, and went through the steps.
+        - I let Google Play Console know about the content of my app -> app access, ads, content rating, target audience, news apps
+        - Manage how your app is organized and presented -> select an app category and provide contact details and set up store listing
+        - Added screenshots of my app, a free icon from https://icons8.com/icons/set/task, and used a graphic generator https://www.norio.be/graphic-generator/ to make a feature graphic for the app.
+        - I also selected country and region (United States) for the app.
+        - taskmaster app link: https://play.google.com/apps/internaltest/4699196980689052555
     * Screenshots
-        - 
+        - ![Home Page](screenshots/home-page-version-8.jpeg)
+        - ![Settings Page](screenshots/settings-version-5.jpeg)
+        - ![Add A Task Page](screenshots/add-task-version-4.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
+        - ![All Tasks Page](screenshots/all-tasks.jpeg)
