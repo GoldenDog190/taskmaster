@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                Log.i(TAG, "handleMessage: hit second handler");
+               // Log.i(TAG, "handleMessage: hit second handler");
                 if (msg.what == 1) {
                     StringJoiner sj = new StringJoiner(", ");
                     for (TeamModel task : taskModel) {

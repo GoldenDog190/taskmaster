@@ -93,7 +93,7 @@ public class AddTask extends AppCompatActivity {
 
         Button button = findViewById(R.id.TaskButton);
         button.setOnClickListener(view -> {
-            Log.i(TAG, "this is the add task button");
+            //Log.i(TAG, "this is the add task button");
             count += 1;
             ((TextView)findViewById(R.id.TaskButton)).setText("Submitted!");
 
