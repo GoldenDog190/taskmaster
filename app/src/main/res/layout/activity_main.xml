@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="64dp"
-        android:text="@string/login_in"
+        android:text="login in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/signupButton"
         app:layout_constraintTop_toBottomOf="@+id/AddATaskButton"
