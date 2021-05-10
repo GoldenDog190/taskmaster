@@ -18,16 +18,16 @@
     <string name="task_three">Task Three</string>
     <string name="my_tasks">My Tasks</string>
     <string name="add_a_task">Add a Task</string>
-<!--    <string name="all_tasks">All Tasks</string>-->
+    <!--    <string name="all_tasks">All Tasks</string>-->
     <string name="settings">Settings</string>
     <string name="task_two">Task Two</string>
     <string name="task_one">Task One</string>
-<!--    <string name="tasks">Tasks</string>-->
+    <!--    <string name="tasks">Tasks</string>-->
     <string name="img">img</string>
     <string name="add_task">Add Task</string>
     <string name="title">title</string>
     <string name="description">description</string>
-<!--    <string name="add_task">Add Task</string>-->
+    <!--    <string name="add_task">Add Task</string>-->
     <string name="total_tasks_0">Total tasks: 0</string>
     <string name="assigned">assigned</string>
     <string name="home">home</string>
@@ -36,4 +36,7 @@
     <string name="radiobutton">RadioButton</string>
     <string name="team_b">Team B</string>
     <string name="team_a">Team A</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">sign in</string>
+    <string name="login_in">login in</string>
 </resources>

@@ -18,13 +18,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.CognitoLoginActivity;
+import com.GoldenDog190.taskmaster.CognitoSignupActivity;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 
@@ -40,6 +44,38 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     public List<TeamModel> taskModel = new ArrayList<>();
 //    public List<Task> task = new ArrayList<>();
     Handler mainThreadHandler;
+
+    //=============Authentication==============================
+    void signupCognito(){
+        Amplify.Auth.signUp(
+                "wildginger@wavecable.com",
+                "password",
+                AuthSignUpOptions.builder()
+                        .userAttribute(AuthUserAttributeKey.email(), "wildginger@wavecable.com")
+                        .userAttribute(AuthUserAttributeKey.nickname(), "amelia")
+                        .build(),
+                r -> Log.i(TAG, "signup success: " + r.toString()),
+                r -> Log.i(TAG, "signup failure: " + r.toString())
+        );
+    }
+
+    void signupConfirmationCognito(String username, String confirmationNumber){
+        Amplify.Auth.confirmSignUp(
+                username,
+                confirmationNumber,
+                r -> Log.i(TAG, "signupConfirmationCognito: " + r.toString()),
+                r -> Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+        );
+    }
+
+    void loginCongnito(String username, String password){
+        Amplify.Auth.signIn(
+                username,
+                password,
+                r -> Log.i(TAG, "loginCongnito success: " + r.toString()),
+                r -> Log.i(TAG, "loginCongnito failure: " + r.toString())
+        );
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             }
         };
 
+
         try {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
@@ -88,8 +125,24 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
            // Log.i(TAG, "configured amplify");
         } catch (AmplifyException e){
             e.printStackTrace();
-
         }
+
+        //=============Authentication==============================
+        // signup
+       // signupCognito();
+
+        //verification
+        // signupConfirmationCognito("wildginger@wavecable.com", "");
+
+        //        login
+      // loginCongnito("nwaterpolo@gmail.com", "password");
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+
+        Amplify.Auth.fetchUserAttributes(
+                list -> Log.i(TAG, "user attr: " + list.toString()),
+                r -> Log.i(TAG, "user attr fail: " + r.toString())
+        );
+
 
 //============================Lab 32====================================
 //                Task newTaskModel = Task.builder()
@@ -170,15 +223,15 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             startActivity(taskDetailsButtonOneIntent);
         });
 
-        Button taskDetailsButtonTwo = findViewById(R.id.taskButtonTwo);
+        Button taskDetailsButtonTwo = findViewById(R.id.signupButton);
         taskDetailsButtonTwo.setOnClickListener(view -> {
-            Intent taskDetailsButtonTwoIntent = new Intent(MainActivity.this, TaskDetail.class);
+            Intent taskDetailsButtonTwoIntent = new Intent(MainActivity.this, CognitoSignupActivity.class);
             startActivity(taskDetailsButtonTwoIntent);
         });
 
-        Button taskDetailsButtonThree = findViewById(R.id.taskButtonThree);
+        Button taskDetailsButtonThree = findViewById(R.id.loginButton);
         taskDetailsButtonThree.setOnClickListener(view -> {
-            Intent taskDetailsButtonThreeIntent = new Intent(MainActivity.this, TaskDetail.class);
+            Intent taskDetailsButtonThreeIntent = new Intent(MainActivity.this, CognitoLoginActivity.class);
             startActivity(taskDetailsButtonThreeIntent);
         });
 
