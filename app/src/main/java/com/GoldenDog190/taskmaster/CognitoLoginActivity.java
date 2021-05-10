@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class CognitoLoginActivity extends AppCompatActivity {
+    public static String TAG = "GoldenDog190.CognitoLoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

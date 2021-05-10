@@ -41,11 +41,11 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login_page">login page</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
+<!--    <string name="password">Password</string>-->
+<!--    <string name="email">Email</string>-->
     <string name="login">Login</string>
     <string name="sign_up_">Sign up</string>
-    <string name="sign_up_">Sign up</string>
+<!--    <string name="sign_up_">Sign up</string>-->
     <string name="complete_registration">Complete Registration</string>
     <string name="sign_up_confirmation">Sign up Confirmation</string>
     <string name="your_email">your email</string>
