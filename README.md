@@ -4,6 +4,7 @@
 * It also has clickable tasks listed on the home page.
 * Add a task on the add task page, and it will be added to a list of tasks on the home page and on the task detail page.
 * Can add team name on the settings page, and add can choose what team a task belongs to.
+* Login, signup, and logout features have been added as well.
 
 ## Daily Change Log:
 
@@ -157,6 +158,11 @@
 
 ### Day 9 - Lab 36 - Cognito
     * Feature Tasks
-        -
+        - User Login
+          * Add Cognito to your Amplify setup. Add in user login and sign up flows to your application, using Cognito’s pre-built UI as appropriate. Display the logged in user’s username somewhere relevant in your app.
+        - User Logout
+          * Allow users to log out of your application.
     * Screenshots
-        -
+        - ![Home Page](screenshots/home-page-version-9.jpeg)
+        - ![Sign up page](screenshots/signup.jpeg)
+        - ![Login page](screenshots/login.jpeg)
