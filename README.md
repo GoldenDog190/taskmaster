@@ -154,3 +154,9 @@
         - ![Add A Task Page](screenshots/add-task-version-4.jpeg)
         - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
         - ![All Tasks Page](screenshots/all-tasks.jpeg)
+
+### Day 9 - Lab 36 - Cognito
+    * Feature Tasks
+        -
+    * Screenshots
+        -
