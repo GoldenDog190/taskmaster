@@ -165,4 +165,5 @@
     * Screenshots
         - ![Home Page](screenshots/home-page-version-9.jpeg)
         - ![Sign up page](screenshots/signup.jpeg)
+        - ![Sign up confirmation page page](screenshots/signup-confirmation.jpeg)
         - ![Login page](screenshots/login.jpeg)

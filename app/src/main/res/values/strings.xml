@@ -51,4 +51,8 @@
     <string name="your_email">your email</string>
     <string name="confimation_code">Confimation Code</string>
     <string name="confirmation_code">Confirmation Code</string>
+    <string name="login_in_home">login in</string>
+    <string name="log_out">log out</string>
+    <string name="my_email">My email</string>
+    <string name="user_email">User Email</string>
 </resources>

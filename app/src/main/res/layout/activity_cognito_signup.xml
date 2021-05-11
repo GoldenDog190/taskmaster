@@ -7,7 +7,7 @@
     tools:context=".CognitoSignupActivity">
 
     <Button
-        android:id="@+id/buttonSignup"
+        android:id="@+id/buttonLoginNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

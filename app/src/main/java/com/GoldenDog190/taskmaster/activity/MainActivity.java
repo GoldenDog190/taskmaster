@@ -28,6 +28,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignOutOptions;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
@@ -217,16 +218,25 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         });
 
 
-        Button taskDetailsButtonOne = findViewById(R.id.taskButtonOne);
+        Button taskDetailsButtonOne = findViewById(R.id.logoutButton);
         taskDetailsButtonOne.setOnClickListener(view -> {
-            Intent taskDetailsButtonOneIntent = new Intent(MainActivity.this, TaskDetail.class);
-            startActivity(taskDetailsButtonOneIntent);
+            Amplify.Auth.signOut(
+//                    AuthSignOutOptions.builder().globalSignOut(true).build(),
+                    () -> {
+                        Intent taskDetailsButtonOneIntent = new Intent(MainActivity.this, CognitoLoginActivity.class);
+                        startActivity(taskDetailsButtonOneIntent);
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                    },
+                    r -> Log.e("AuthQuickstart", r.toString())
+            );
+
         });
 
         Button taskDetailsButtonTwo = findViewById(R.id.signupButton);
         taskDetailsButtonTwo.setOnClickListener(view -> {
             Intent taskDetailsButtonTwoIntent = new Intent(MainActivity.this, CognitoSignupActivity.class);
             startActivity(taskDetailsButtonTwoIntent);
+
         });
 
         Button taskDetailsButtonThree = findViewById(R.id.loginButton);
@@ -274,9 +284,18 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
     }
 
+
     @Override
     protected void onResume(){
         super.onResume();
+
+        //========Authentication========
+    AuthUser authUser = Amplify.Auth.getCurrentUser();
+    if (authUser != null){
+        String email = authUser.getUsername();
+        ((TextView) findViewById(R.id.textMyEmail)).setText(email);
+    }
+
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
         //Log.i(TAG,"username" + username);
