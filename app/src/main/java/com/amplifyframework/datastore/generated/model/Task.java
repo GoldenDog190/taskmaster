@@ -27,9 +27,9 @@ public final class Task implements Model {
   public static final QueryField ASSIGNED = field("Task", "assigned");
   public static final QueryField TASK = field("Task", "teamModelId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  public final @ModelField(targetType="String") String title;
-  public final @ModelField(targetType="String") String body;
-  public final @ModelField(targetType="String") String assigned;
+  private final @ModelField(targetType="String") String title;
+  private final @ModelField(targetType="String") String body;
+  private final @ModelField(targetType="String") String assigned;
   private final @ModelField(targetType="TeamModel", isRequired = true) @BelongsTo(targetName = "teamModelId", type = TeamModel.class) TeamModel task;
   public String getId() {
       return id;

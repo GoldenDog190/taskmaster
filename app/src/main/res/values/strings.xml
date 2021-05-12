@@ -14,7 +14,7 @@
     <string name="hello">Hello World</string>
     <string name="all_tasks">All Tasks</string>
     <string name="back">Back</string>
-    <string name="todo">TODO</string>
+<!--    <string name="todo">TODO</string>-->
     <string name="task_three">Task Three</string>
     <string name="my_tasks">My Tasks</string>
     <string name="add_a_task">Add a Task</string>
@@ -55,4 +55,9 @@
     <string name="log_out">log out</string>
     <string name="my_email">My email</string>
     <string name="user_email">User Email</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="tempimg">tempimg</string>
+    <string name="image">image</string>
+    <string name="detailimg">detailimg</string>
+    <!--    <string name="todo">TODO</string>-->
 </resources>

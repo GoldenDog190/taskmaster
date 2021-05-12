@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
@@ -15,6 +18,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +32,12 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
+//        downloadFile();
+
 //        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
 //                .allowMainThreadQueries()
 //                .build();
+
 
         Button goHomeButton = findViewById(R.id.goHomeButton);
         goHomeButton.setOnClickListener(view -> {
@@ -42,22 +49,22 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //            taskName.setText("task");
 //            Intent intent = getIntent();
 //            ((TextView)findViewById(R.id.textTaskTitle)).setText(intent.getStringExtra("tasks"));
-//
+
 //            EditText taskDetails = (EditText)findViewById(R.id.editTextTextMultiLine);
 //            taskDetails.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
-//          Intent intent = getIntent();
-//        if (intent.getStringExtra("task")==null){
+//          Intent i = getIntent();
+//        if (i.getStringExtra("task")==null){
 //            Log.i(TAG, "task details needs to be here");
 //        } else {
-//            String title = intent.getStringExtra("task");
-//            String body = intent.getStringExtra("body");
-//            String assigned = intent.getStringExtra("assigned");
+//            String title = i.getStringExtra("task");
+//            String body = i.getStringExtra("body");
+//            String assigned = i.getStringExtra("assigned");
 //
-//            Log.i(TAG, "onCreate" + title);
+////            Log.i(TAG, "onCreate" + title);
 //
 //            String info = title + " " + body + " " + assigned;
 //
-//            ((TextView) findViewById(R.id.editTextTextMultiLine)).setText(info);
+//            ((TextView) findViewById(R.id.taskDetailRecyclerView)).setText(info);
 //
 //        }
 
@@ -68,7 +75,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        taskModels.add(new TaskModel("Task 3", "Clean the bird cage", "today"));
 //        RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
 //        rv.setLayoutManager(new LinearLayoutManager(this));
-//        rv.setAdapter(new TaskViewAdapter(taskModels, this));
+//        rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
 
         Amplify.API.query(
@@ -84,10 +91,42 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
                 },
                    res ->{} //Log.i(TAG, "onCreate: failure" + res.toString())
         );
-                    RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
-                    rv.setLayoutManager(new LinearLayoutManager(this));
-                    rv.setAdapter(new TaskViewAdapter(taskModel, this));
+                    RecyclerView rev = findViewById(R.id.taskDetailRecyclerView);
+                    rev.setLayoutManager(new LinearLayoutManager(this));
+                    rev.setAdapter(new TaskViewAdapter(taskModel, this));
 
+//        Amplify.API.query(
+//                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
+//                r -> {
+//                    // Log.i(TAG, r.toString());
+//                },
+//                r -> {
+//                    // Log.i(TAG, "onCreate: " + r.toString());
+//                }
+//        );
+
+
+    }
+
+    void saveFile(File file, String filename){
+        Amplify.Storage.uploadFile(
+                filename,
+                file,
+                r -> {
+                },
+                r -> {}
+        );
+    }
+
+    public void downloadFile(String key){
+        Amplify.Storage.downloadFile(
+                key,
+                new File(getApplicationContext().getFilesDir() + "/" + key + ".txt"),
+                r -> {
+                    ImageView i = findViewById(R.id.imageViewDetail);
+                    i.setImageBitmap(BitmapFactory.decodeFile(r.getFile().getPath()));
+                    },
+                r -> {});
     }
 
 //    @Override

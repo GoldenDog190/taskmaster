@@ -241,6 +241,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "s3ImageKey",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "teamModels",
                         "description": null,
                         "args": [
@@ -1162,6 +1174,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "s3ImageKey",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -1531,6 +1553,16 @@
                             "ofType": null
                         },
                         "defaultValue": null
+                    },
+                    {
+                        "name": "s3ImageKey",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
                     }
                 ],
                 "interfaces": null,
@@ -1575,6 +1607,16 @@
                     },
                     {
                         "name": "assigned",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "s3ImageKey",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -1678,6 +1720,16 @@
                     },
                     {
                         "name": "assigned",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "s3ImageKey",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",

@@ -5,6 +5,7 @@
 * Add a task on the add task page, and it will be added to a list of tasks on the home page and on the task detail page.
 * Can add team name on the settings page, and add can choose what team a task belongs to.
 * Login, signup, and logout features have been added as well.
+* Can add image to task.
 
 ## Daily Change Log:
 
@@ -167,3 +168,14 @@
         - ![Sign up page](screenshots/signup.jpeg)
         - ![Sign up confirmation page page](screenshots/signup-confirmation.jpeg)
         - ![Login page](screenshots/login.jpeg)
+
+### Day 10 - Lab 37 - S3
+    * Feature Tasks
+        - Uploads
+          * On the “Add a Task” activity, allow users to optionally select a file to attach to that task. If a user attaches a file to a task, that file should be uploaded to S3, and associated with that task.
+        - Displaying Files
+          * On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity. (If the file is any other type, you should display a link to it.)
+    * Screenshots
+        - ![[Add A Task Page](screenshots/add-task-version-5.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
+

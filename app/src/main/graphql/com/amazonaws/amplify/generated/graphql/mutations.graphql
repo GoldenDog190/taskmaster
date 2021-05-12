@@ -9,6 +9,7 @@ mutation CreateTeamModel(
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -35,6 +36,7 @@ mutation UpdateTeamModel(
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -61,6 +63,7 @@ mutation DeleteTeamModel(
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -93,6 +96,7 @@ mutation CreateTask(
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }
@@ -119,6 +123,7 @@ mutation UpdateTask(
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }
@@ -145,6 +150,7 @@ mutation DeleteTask(
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }

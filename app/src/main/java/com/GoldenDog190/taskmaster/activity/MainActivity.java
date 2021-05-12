@@ -32,6 +32,7 @@ import com.amplifyframework.auth.options.AuthSignOutOptions;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,11 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                         .userAttribute(AuthUserAttributeKey.email(), "wildginger@wavecable.com")
                         .userAttribute(AuthUserAttributeKey.nickname(), "amelia")
                         .build(),
-                r -> Log.i(TAG, "signup success: " + r.toString()),
-                r -> Log.i(TAG, "signup failure: " + r.toString())
+                r -> {//Log.i(TAG, "signup success: " + r.toString())
+                     },
+                r -> { //Log.i(TAG, "signup failure: " + r.toString())
+
+                }
         );
     }
 
@@ -64,8 +68,12 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         Amplify.Auth.confirmSignUp(
                 username,
                 confirmationNumber,
-                r -> Log.i(TAG, "signupConfirmationCognito: " + r.toString()),
-                r -> Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+                r -> {
+                  //  Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+                },
+                r -> {
+                   // Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+                }
         );
     }
 
@@ -73,8 +81,12 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         Amplify.Auth.signIn(
                 username,
                 password,
-                r -> Log.i(TAG, "loginCongnito success: " + r.toString()),
-                r -> Log.i(TAG, "loginCongnito failure: " + r.toString())
+                r -> {
+                  //  Log.i(TAG, "loginCongnito success: " + r.toString())
+                },
+                r -> {
+                   // Log.i(TAG, "loginCongnito failure: " + r.toString())
+                }
         );
     }
 
@@ -122,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         try {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
            // Log.i(TAG, "configured amplify");
         } catch (AmplifyException e){

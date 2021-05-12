@@ -33,7 +33,8 @@ public class CognitoSignupActivity extends AppCompatActivity {
                         intent.putExtra("email", email);
                         startActivity(intent);
                     },
-                    r -> Log.i(TAG, "signup failure: " + r.toString())
+                    r -> {//Log.i(TAG, "signup failure: " + r.toString())
+                    }
             );
         });
     }

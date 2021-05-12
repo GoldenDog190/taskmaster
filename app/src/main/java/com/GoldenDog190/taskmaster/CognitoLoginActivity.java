@@ -32,10 +32,10 @@ public class CognitoLoginActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg){
                 if(msg.what == 1){
-                    Log.i(TAG, "handleMessage: success signin");
+                   // Log.i(TAG, "handleMessage: success signin");
                     Toast.makeText(CognitoLoginActivity.this, "signed in", Toast.LENGTH_LONG).show();
                 } else if(msg.what == 2){
-                    Log.i(TAG, "handleMessage: fail signin");
+                  //  Log.i(TAG, "handleMessage: fail signin");
 
                     Toast.makeText(CognitoLoginActivity.this, "sign in failed", Toast.LENGTH_LONG).show();
                 }

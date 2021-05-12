@@ -6,6 +6,7 @@ subscription OnCreateTeamModel {
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -29,6 +30,7 @@ subscription OnUpdateTeamModel {
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -52,6 +54,7 @@ subscription OnDeleteTeamModel {
     title
     body
     assigned
+    s3ImageKey
     teamModels {
       items {
         id
@@ -81,6 +84,7 @@ subscription OnCreateTask {
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }
@@ -104,6 +108,7 @@ subscription OnUpdateTask {
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }
@@ -127,6 +132,7 @@ subscription OnDeleteTask {
       title
       body
       assigned
+      s3ImageKey
       teamModels {
         nextToken
       }

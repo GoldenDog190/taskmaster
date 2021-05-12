@@ -25,11 +25,13 @@ public final class TeamModel implements Model {
   public static final QueryField TITLE = field("TeamModel", "title");
   public static final QueryField BODY = field("TeamModel", "body");
   public static final QueryField ASSIGNED = field("TeamModel", "assigned");
+  public static final QueryField S3_IMAGE_KEY = field("TeamModel", "s3ImageKey");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   public final @ModelField(targetType="String") String name;
   public final @ModelField(targetType="String") String title;
   public final @ModelField(targetType="String") String body;
   public final @ModelField(targetType="String") String assigned;
+  public final @ModelField(targetType="String") String s3ImageKey;
   public final @ModelField(targetType="Task") @HasMany(associatedWith = "task", type = Task.class) List<Task> teamModels = null;
   public String getId() {
       return id;
@@ -51,16 +53,21 @@ public final class TeamModel implements Model {
       return assigned;
   }
   
+  public String getS3ImageKey() {
+      return s3ImageKey;
+  }
+  
   public List<Task> getTeamModels() {
       return teamModels;
   }
   
-  private TeamModel(String id, String name, String title, String body, String assigned) {
+  private TeamModel(String id, String name, String title, String body, String assigned, String s3ImageKey) {
     this.id = id;
     this.name = name;
     this.title = title;
     this.body = body;
     this.assigned = assigned;
+    this.s3ImageKey = s3ImageKey;
   }
   
   @Override
@@ -75,7 +82,8 @@ public final class TeamModel implements Model {
               ObjectsCompat.equals(getName(), teamModel.getName()) &&
               ObjectsCompat.equals(getTitle(), teamModel.getTitle()) &&
               ObjectsCompat.equals(getBody(), teamModel.getBody()) &&
-              ObjectsCompat.equals(getAssigned(), teamModel.getAssigned());
+              ObjectsCompat.equals(getAssigned(), teamModel.getAssigned()) &&
+              ObjectsCompat.equals(getS3ImageKey(), teamModel.getS3ImageKey());
       }
   }
   
@@ -87,6 +95,7 @@ public final class TeamModel implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getAssigned())
+      .append(getS3ImageKey())
       .toString()
       .hashCode();
   }
@@ -99,7 +108,8 @@ public final class TeamModel implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
-      .append("assigned=" + String.valueOf(getAssigned()))
+      .append("assigned=" + String.valueOf(getAssigned()) + ", ")
+      .append("s3ImageKey=" + String.valueOf(getS3ImageKey()))
       .append("}")
       .toString();
   }
@@ -132,6 +142,7 @@ public final class TeamModel implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -141,7 +152,8 @@ public final class TeamModel implements Model {
       name,
       title,
       body,
-      assigned);
+      assigned,
+      s3ImageKey);
   }
   public interface BuildStep {
     TeamModel build();
@@ -150,6 +162,7 @@ public final class TeamModel implements Model {
     BuildStep title(String title);
     BuildStep body(String body);
     BuildStep assigned(String assigned);
+    BuildStep s3ImageKey(String s3ImageKey);
   }
   
 
@@ -159,6 +172,7 @@ public final class TeamModel implements Model {
     private String title;
     private String body;
     private String assigned;
+    private String s3ImageKey;
     @Override
      public TeamModel build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -168,7 +182,8 @@ public final class TeamModel implements Model {
           name,
           title,
           body,
-          assigned);
+          assigned,
+          s3ImageKey);
     }
     
     @Override
@@ -195,6 +210,12 @@ public final class TeamModel implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep s3ImageKey(String s3ImageKey) {
+        this.s3ImageKey = s3ImageKey;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -218,12 +239,13 @@ public final class TeamModel implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String title, String body, String assigned) {
+    private CopyOfBuilder(String id, String name, String title, String body, String assigned, String s3ImageKey) {
       super.id(id);
       super.name(name)
         .title(title)
         .body(body)
-        .assigned(assigned);
+        .assigned(assigned)
+        .s3ImageKey(s3ImageKey);
     }
     
     @Override
@@ -244,6 +266,11 @@ public final class TeamModel implements Model {
     @Override
      public CopyOfBuilder assigned(String assigned) {
       return (CopyOfBuilder) super.assigned(assigned);
+    }
+    
+    @Override
+     public CopyOfBuilder s3ImageKey(String s3ImageKey) {
+      return (CopyOfBuilder) super.s3ImageKey(s3ImageKey);
     }
   }
   
