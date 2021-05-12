@@ -33,6 +33,9 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +44,14 @@ import java.util.StringJoiner;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
-//    TaskDatabase taskDatabase;
+    //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
-//    public List<Task> task = new ArrayList<>();
+    //    public List<Task> task = new ArrayList<>();
     Handler mainThreadHandler;
 
     //=============Authentication==============================
-    void signupCognito(){
+    void signupCognito() {
         Amplify.Auth.signUp(
                 "wildginger@wavecable.com",
                 "password",
@@ -57,35 +60,35 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                         .userAttribute(AuthUserAttributeKey.nickname(), "amelia")
                         .build(),
                 r -> {//Log.i(TAG, "signup success: " + r.toString())
-                     },
+                },
                 r -> { //Log.i(TAG, "signup failure: " + r.toString())
 
                 }
         );
     }
 
-    void signupConfirmationCognito(String username, String confirmationNumber){
+    void signupConfirmationCognito(String username, String confirmationNumber) {
         Amplify.Auth.confirmSignUp(
                 username,
                 confirmationNumber,
                 r -> {
-                  //  Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+                    //  Log.i(TAG, "signupConfirmationCognito: " + r.toString())
                 },
                 r -> {
-                   // Log.i(TAG, "signupConfirmationCognito: " + r.toString())
+                    // Log.i(TAG, "signupConfirmationCognito: " + r.toString())
                 }
         );
     }
 
-    void loginCongnito(String username, String password){
+    void loginCongnito(String username, String password) {
         Amplify.Auth.signIn(
                 username,
                 password,
                 r -> {
-                  //  Log.i(TAG, "loginCongnito success: " + r.toString())
+                    //  Log.i(TAG, "loginCongnito success: " + r.toString())
                 },
                 r -> {
-                   // Log.i(TAG, "loginCongnito failure: " + r.toString())
+                    // Log.i(TAG, "loginCongnito failure: " + r.toString())
                 }
         );
     }
@@ -94,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        configureAmplify();
+        registerWithFirebaseAndPinpoint();
 
 
 //        RecyclerView rv = findViewById(R.id.taskRecycleView);
@@ -110,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         rv.setLayoutManager(new LinearLayoutManager(this));
 
 
-
 // AWS Amplify
 
         mainThreadHandler = new Handler(this.getMainLooper()) {
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-               // Log.i(TAG, "handleMessage: hit second handler");
+                // Log.i(TAG, "handleMessage: hit second handler");
                 if (msg.what == 1) {
                     StringJoiner sj = new StringJoiner(", ");
                     for (TeamModel task : taskModel) {
@@ -136,20 +141,20 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
-           // Log.i(TAG, "configured amplify");
-        } catch (AmplifyException e){
+            // Log.i(TAG, "configured amplify");
+        } catch (AmplifyException e) {
             e.printStackTrace();
         }
 
         //=============Authentication==============================
         // signup
-       // signupCognito();
+        // signupCognito();
 
         //verification
         // signupConfirmationCognito("wildginger@wavecable.com", "");
 
         //        login
-      // loginCongnito("nwaterpolo@gmail.com", "password");
+        // loginCongnito("nwaterpolo@gmail.com", "password");
         AuthUser authUser = Amplify.Auth.getCurrentUser();
 
         Amplify.Auth.fetchUserAttributes(
@@ -190,16 +195,16 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                 ModelQuery.list(TeamModel.class),
                 response -> {
 
-                    for (TeamModel tasks : response.getData()){
+                    for (TeamModel tasks : response.getData()) {
                         taskModel.add(tasks);
-                       // Log.i(TAG, "task: " + tasks.getClass());
+                        // Log.i(TAG, "task: " + tasks.getClass());
                     }
                     mainThreadHandler.sendEmptyMessage(1);
 
                 },
-                   response -> {
+                response -> {
                     //Log.i(TAG, "onCreate: failed to retrieve" + response.toString());
-                     }
+                }
         );
 
 //===========load database==========
@@ -226,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
         Button settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(view -> {
-            Intent settingsButtonIntent  = new Intent(MainActivity.this, Settings.class);
+            Intent settingsButtonIntent = new Intent(MainActivity.this, Settings.class);
             startActivity(settingsButtonIntent);
         });
 
@@ -269,10 +274,10 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         Amplify.API.query(
                 ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
                 r -> {
-                   // Log.i(TAG, r.toString());
+                    // Log.i(TAG, r.toString());
                 },
                 r -> {
-                  // Log.i(TAG, "onCreate: " + r.toString());
+                    // Log.i(TAG, "onCreate: " + r.toString());
                 }
         );
 
@@ -299,35 +304,34 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         //========Authentication========
-    AuthUser authUser = Amplify.Auth.getCurrentUser();
-    if (authUser != null){
-        String email = authUser.getUsername();
-        ((TextView) findViewById(R.id.textMyEmail)).setText(email);
-    }
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        if (authUser != null) {
+            String email = authUser.getUsername();
+            ((TextView) findViewById(R.id.textMyEmail)).setText(email);
+        }
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
         //Log.i(TAG,"username" + username);
         String task = "Tasks";
-        if(username !=null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
-            ((TextView)findViewById(R.id.textViewTasks)).setText(task);
+        if (username != null) task = String.format(Locale.ENGLISH, "%s Tasks", username);
+        ((TextView) findViewById(R.id.textViewTasks)).setText(task);
 
-        String teamname =  preferences.getString("teamname", "");
-       // Log.i(TAG,"teamname" + teamname);
+        String teamname = preferences.getString("teamname", "");
+        // Log.i(TAG,"teamname" + teamname);
         String taskTeam = "Tasks";
-        if(teamname !=null) taskTeam = String.format(Locale.ENGLISH, "%s Tasks", teamname);
-        ((TextView)findViewById(R.id.textViewTasks)).setText(taskTeam);
+        if (teamname != null) taskTeam = String.format(Locale.ENGLISH, "%s Tasks", teamname);
+        ((TextView) findViewById(R.id.textViewTasks)).setText(taskTeam);
 
 
     }
 
 
-
-    private View.OnClickListener TaskButton(){
+    private View.OnClickListener TaskButton() {
         return view -> {
             Intent intent = new Intent(MainActivity.this, TaskDetail.class);
             MainActivity.this.startActivity(intent);
@@ -348,4 +352,27 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         MainActivity.this.startActivity(intent);
 //        Log.i(TAG, "task " + taskModel.name);
     }
+
+    void registerWithFirebaseAndPinpoint(){
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) { //TODO: make sure this is the non taskmaster Task
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        } else {
+                            Log.i(TAG, "onComplete: firbaSE GOT A TOKEN");
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+
+                    }
+                });
+
+    }
+
 }
