@@ -41,9 +41,10 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
         holder.taskModel = taskModelList.get(position);
         ((TextView)holder.itemView.findViewById(R.id.textViewTaskItem))
                 .setText(
-                         taskModelList.get(position).title + " "
+                        taskModelList.get(position).name + taskModelList.get(position).title + " "
                         + taskModelList.get(position).body + " "
-                        + taskModelList.get(position).assigned);
+                        + taskModelList.get(position).assigned
+                                + taskModelList.get(position).s3ImageKey);
 
         holder.itemView.setOnClickListener(v -> {
             clickOnTaskAble.handleClickOnTask(holder);

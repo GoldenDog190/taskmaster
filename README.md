@@ -5,6 +5,7 @@
 * Add a task on the add task page, and it will be added to a list of tasks on the home page and on the task detail page.
 * Can add team name on the settings page, and add can choose what team a task belongs to.
 * Login, signup, and logout features have been added as well.
+* Can add image to task.
 
 ## Daily Change Log:
 
@@ -175,7 +176,6 @@
         - Displaying Files
           * On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity. (If the file is any other type, you should display a link to it.)
     * Screenshots
-        - ![Home Page](screenshots/home-page-version-9.jpeg)
         - ![[Add A Task Page](screenshots/add-task-version-5.jpeg)
         - ![Task Detail Page](screenshots/task-detail-version-6.jpeg)
 

@@ -95,6 +95,16 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
                     rev.setLayoutManager(new LinearLayoutManager(this));
                     rev.setAdapter(new TaskViewAdapter(taskModel, this));
 
+//        Amplify.API.query(
+//                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
+//                r -> {
+//                    // Log.i(TAG, r.toString());
+//                },
+//                r -> {
+//                    // Log.i(TAG, "onCreate: " + r.toString());
+//                }
+//        );
+
 
     }
 

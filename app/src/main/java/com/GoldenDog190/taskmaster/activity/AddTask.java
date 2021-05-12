@@ -119,7 +119,9 @@ public class AddTask extends AppCompatActivity {
 
             String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
 
-//            String name = ((Spinner)findViewById(R.id.spinner)).getTransitionName().toString();
+            String imageView = String.valueOf(((ImageView) findViewById(R.id.imageViewAdd)));
+
+            String name = ((Spinner)findViewById(R.id.spinner)).getTransitionName().toString();
 
 //  Spinner teamspinner = findViewById(R.id.spinner);
 //            String selectedTeam = teamspinner.getSelectedItem().toString();
@@ -130,6 +132,7 @@ public class AddTask extends AppCompatActivity {
                     .title(title)
                     .body(body)
                     .assigned(assigned)
+                    .s3ImageKey(imageView)
                     .build();
             Amplify.API.mutate(
                     ModelMutation.create(newTaskModel),
@@ -156,17 +159,10 @@ public class AddTask extends AppCompatActivity {
 //                    }
 //            );
 //
-//            void saveFile(File file, String filename){
-//                Amplify.Storage.uploadFile(
-//                        filename,
-//                        file,
-//                        r -> {
-//                        },
-//                        r -> {}
-//                );
-//            }
+
 
             Amplify.Storage.uploadFile(
+//                    Math.random(),
                     newTaskModel.getId(),
                     fileToUpload,
                     r -> {
