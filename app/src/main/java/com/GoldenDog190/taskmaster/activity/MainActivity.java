@@ -34,7 +34,9 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.tasks.Tasks;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -352,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         MainActivity.this.startActivity(intent);
 //        Log.i(TAG, "task " + taskModel.name);
     }
+
 
     void registerWithFirebaseAndPinpoint(){
 

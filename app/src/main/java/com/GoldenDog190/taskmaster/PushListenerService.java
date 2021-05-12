@@ -1,6 +1,7 @@
 package com.GoldenDog190.taskmaster;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -16,15 +17,15 @@ public class PushListenerService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         Log.i(TAG, "onMessageReceived: " +  remoteMessage.toString());
 
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationCompat.CATEGORY_REMINDER)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle(remoteMessage.getFrom())
-                .setContentText(remoteMessage.getSentTime() + "")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(1, builder.build());
+//        Toast toast = Toast.makeText(getApplicationContext(), remoteMessage.getData().toString(), Toast.LENGTH_LONG);
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationCompat.CATEGORY_ERROR)
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .setContentTitle(remoteMessage.getFrom())
+//                .setContentText(remoteMessage.getSentTime() + "")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//        notificationManager.notify(1, builder.build());
 
 
     }
