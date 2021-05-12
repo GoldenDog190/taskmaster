@@ -58,5 +58,6 @@
     <string name="upload_image">Upload Image</string>
     <string name="tempimg">tempimg</string>
     <string name="image">image</string>
+    <string name="detailimg">detailimg</string>
     <!--    <string name="todo">TODO</string>-->
 </resources>
