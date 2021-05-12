@@ -91,9 +91,9 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
                 },
                    res ->{} //Log.i(TAG, "onCreate: failure" + res.toString())
         );
-                    RecyclerView rev = findViewById(R.id.taskDetailRecyclerView);
-                    rev.setLayoutManager(new LinearLayoutManager(this));
-                    rev.setAdapter(new TaskViewAdapter(taskModel, this));
+                    RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
+                    rv.setLayoutManager(new LinearLayoutManager(this));
+                    rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
 //        Amplify.API.query(
 //                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),

@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
         rv.setAdapter(new TaskViewAdapter(taskModel, vh -> {
-            Intent intent = new Intent(MainActivity.this, AddTask.class);
+            Intent intent = new Intent(MainActivity.this, TaskDetail.class);
             intent.putExtra("teamModelId", vh.taskModel.getId());
             startActivity(intent);
         }));
