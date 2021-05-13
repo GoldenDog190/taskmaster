@@ -197,4 +197,4 @@
          * Add Analytics to your amplify project.
          * Create and send an Event whenever you launch intents that start new activities.
       * Screenshots
-        - ![Dashboard screenshot](screenshots/dashboard-screenshot.jpeg)
+        - ![Dashboard screenshot](screenshots/dashboard-event-screenshot.jpeg)

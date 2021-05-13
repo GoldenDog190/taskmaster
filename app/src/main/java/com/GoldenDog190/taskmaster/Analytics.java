@@ -20,6 +20,9 @@ public class Analytics {
                     AnalyticsProperties.builder()
                             .add("platform", "taskmaster android app")
                             .add("User has tasks", true)
+                            .add("Add a task", true)
+                            .add("Join a team", true)
+                            .add("Cost to use task master", 0)
                             .build()
             );
 

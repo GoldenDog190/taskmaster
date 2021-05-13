@@ -108,6 +108,17 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
+            Amplify.configure(getApplicationContext());
+            // Log.i(TAG, "configured amplify");
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
+
 //        configureAmplify();
         registerWithFirebaseAndPinpoint();
 
@@ -157,16 +168,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         };
 
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSS3StoragePlugin());
-            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
-            Amplify.configure(getApplicationContext());
-            // Log.i(TAG, "configured amplify");
-        } catch (AmplifyException e) {
-            e.printStackTrace();
-        }
+
 
         //=============Authentication==============================
         // signup

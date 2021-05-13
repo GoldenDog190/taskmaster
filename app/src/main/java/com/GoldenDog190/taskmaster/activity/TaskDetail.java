@@ -115,7 +115,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //            taskDetails.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
 //          Intent i = getIntent();
 //        if (i.getStringExtra("task")==null){
-//            Log.i(TAG, "task details needs to be here");
+//          //  Log.i(TAG, "task details needs to be here");
 //        } else {
 //            String title = i.getStringExtra("task");
 //            String body = i.getStringExtra("body");
@@ -139,15 +139,15 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
 
-//        Amplify.API.query(
-//                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
-//                r -> {
-//                    // Log.i(TAG, r.toString());
-//                },
-//                r -> {
-//                    // Log.i(TAG, "onCreate: " + r.toString());
-//                }
-//        );
+        Amplify.API.query(
+                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
+                r -> {
+                    // Log.i(TAG, r.toString());
+                },
+                r -> {
+                    // Log.i(TAG, "onCreate: " + r.toString());
+                }
+        );
 
 
     }
@@ -166,15 +166,15 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
         );
     }
 
-//    void saveFile(File file, String filename){
-//        Amplify.Storage.uploadFile(
-//                filename,
-//                file,
-//                r -> {
-//                },
-//                r -> {}
-//        );
-//    }
+    void saveFile(File file, String filename){
+        Amplify.Storage.uploadFile(
+                filename,
+                file,
+                r -> {
+                },
+                r -> {}
+        );
+    }
 
 //    @Override
 //    public void listener(TaskModel taskModel) {
