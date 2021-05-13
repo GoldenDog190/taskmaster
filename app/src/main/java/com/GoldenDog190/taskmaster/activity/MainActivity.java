@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.Analytics;
 import com.GoldenDog190.taskmaster.CognitoLoginActivity;
 import com.GoldenDog190.taskmaster.CognitoSignupActivity;
 import com.GoldenDog190.taskmaster.R;
@@ -42,19 +43,22 @@ import com.google.android.play.core.tasks.Tasks;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringJoiner;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
-    private static final String OPENED_EVENT = ;
-    static String OPENED_APP_EVENT = OPENED_EVENT;
+
+    static String OPENED_APP_EVENT = "Opened Task Master";
     //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
     //    public List<Task> task = new ArrayList<>();
     Handler mainThreadHandler;
+
+    Date resumedTime;
 
     //=============Authentication==============================
     void signupCognito() {
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
     //====================Analytics & Pinpoint tracking==================================
-        AnalyticsEvent e = AnalyticsEvent.builder()
+        AnalyticsEvent event = AnalyticsEvent.builder()
                 .name(OPENED_APP_EVENT)
                 .addProperty("user", "can add a task")
                 .addProperty("user", "can add a picture")
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
                 .addProperty("Number of users", 1)
                 .build();
 
-        Amplify.Analytics.recordEvent(e);
+        Amplify.Analytics.recordEvent(event);
 
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
@@ -345,7 +349,14 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         if (teamname != null) taskTeam = String.format(Locale.ENGLISH, "%s Tasks", teamname);
         ((TextView) findViewById(R.id.textViewTasks)).setText(taskTeam);
 
+        resumedTime = new Date();
 
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Analytics.getAnalytics().trackTimeSpentOnPage(resumedTime, new Date(), "MainActivity");
     }
 
 

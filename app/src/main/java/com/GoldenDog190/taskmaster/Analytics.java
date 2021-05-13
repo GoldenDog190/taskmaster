@@ -1,8 +1,11 @@
 package com.GoldenDog190.taskmaster;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.analytics.AnalyticsProperties;
 import com.amplifyframework.analytics.UserProfile;
 import com.amplifyframework.core.Amplify;
+
+import java.util.Date;
 
 public class Analytics {
 
@@ -31,6 +34,17 @@ public class Analytics {
         return analytics;
     }
 
+    public void trackTimeSpentOnPage(Date start, Date end, String activity) {
 
+        long duration = end.getTime() - start.getTime();
+        int seconds = (int) (duration / 1000);
+        Amplify.Analytics.recordEvent(
+                AnalyticsEvent.builder()
+                        .name("durationOnActivity")
+                        .addProperty("activity", activity)
+                        .addProperty("duration on this activity", seconds)
+                        .build()
+        );
+    }
 
 }
