@@ -20,7 +20,7 @@
         android:id="@+id/taskDetailRecyclerView"
         android:layout_width="267dp"
         android:layout_height="266dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="148dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTaskTitle" />
@@ -44,9 +44,10 @@
         android:contentDescription="@string/detailimg"
         app:layout_constraintBottom_toTopOf="@+id/taskDetailRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTaskTitle"
-        app:srcCompat="@android:drawable/picture_frame" />
+        app:layout_constraintVertical_bias="0.461"
+        app:srcCompat="@android:drawable/ic_menu_today" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

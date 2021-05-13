@@ -59,5 +59,6 @@
     <string name="tempimg">tempimg</string>
     <string name="image">image</string>
     <string name="detailimg">detailimg</string>
+    <string name="fragmentimg">fragmentImg</string>
     <!--    <string name="todo">TODO</string>-->
 </resources>

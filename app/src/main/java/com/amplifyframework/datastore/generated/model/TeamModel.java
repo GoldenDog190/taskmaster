@@ -1,5 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
+import android.graphics.Bitmap;
+
 import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
@@ -33,7 +35,9 @@ public final class TeamModel implements Model {
   public final @ModelField(targetType="String") String assigned;
   public final @ModelField(targetType="String") String s3ImageKey;
   public final @ModelField(targetType="Task") @HasMany(associatedWith = "task", type = Task.class) List<Task> teamModels = null;
-  public String getId() {
+    public Bitmap bitmap;
+
+    public String getId() {
       return id;
   }
   

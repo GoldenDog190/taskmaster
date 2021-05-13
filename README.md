@@ -6,6 +6,7 @@
 * Can add team name on the settings page, and add can choose what team a task belongs to.
 * Login, signup, and logout features have been added as well.
 * Can add image to task.
+* Send messages/ notifications from Firebase to app/ emulator.
 
 ## Daily Change Log:
 
@@ -178,4 +179,15 @@
     * Screenshots
         - ![[Add A Task Page](screenshots/add-task-version-5.jpeg)
         - ![Task Detail Page](screenshots/task-detail-version-5.jpeg)
+
+### Day 11 - Lab 38 - Notifications
+    * Feature Tasks
+        - Connect to firebase.
+        - Load the firebase classed in your app.
+        - Register your app on firebase.
+        - Send a notification (try to get a Notification to popup). Otherwise, pop up a Toast.
+        - Submit a screenshot of your Notification or Toast popping up.
+     * Screenshots
+        - ![Sent messages/notifications to the emulator from Firebase](screenshots/firebase-sent-message-to-emulator.jpeg)
+
 

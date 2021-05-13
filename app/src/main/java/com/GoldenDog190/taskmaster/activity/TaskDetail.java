@@ -1,12 +1,16 @@
 package com.GoldenDog190.taskmaster.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,8 +28,11 @@ import java.util.List;
 
 public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.TaskDetails";
+
+    static int IMAGE_LOADED_MSG = 9;
+    Handler handler;
 //    TaskDatabase taskDatabase;
-            public List<TeamModel> taskModel = new ArrayList<>();
+//            public List<TeamModel> taskModel = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +45,66 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //                .allowMainThreadQueries()
 //                .build();
 
-
         Button goHomeButton = findViewById(R.id.goHomeButton);
         goHomeButton.setOnClickListener(view -> {
             Intent goHomeButtonIntent = new Intent(TaskDetail.this, MainActivity.class);
             startActivity(goHomeButtonIntent);
         });
+
+        MutableLiveData<List<TeamModel>> teamModelList = new MutableLiveData<>(new ArrayList<>());
+
+        RecyclerView rv = findViewById(R.id.taskDetailRecyclerView);
+        rv.setAdapter(new TaskViewAdapter(teamModelList.getValue(), this));
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        handler = new Handler(getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == IMAGE_LOADED_MSG) {
+                    Log.i(TAG, "handleMessage: " + msg.arg1);
+                    rv.getAdapter().notifyItemChanged(msg.arg1);
+                }
+            }
+        };
+
+            teamModelList.observe(this, new Observer<List<TeamModel>>() {
+                @Override
+                public void onChanged(List<TeamModel> teamModelList) {
+                    rv.getAdapter().notifyDataSetChanged();
+                }
+            });
+
+
+         Amplify.API.query(
+                 ModelQuery.list(TeamModel.class),
+            response -> {
+//                    Log.i(TAG, "onCreate: success");
+                List<TeamModel> oldList = teamModelList.getValue();
+                int counter = 0;
+                for(TeamModel teamM : response.getData()) {
+                    oldList.add(teamM);
+                    goGetImage(teamM, counter);
+                    counter++;
+                }
+                teamModelList.postValue(oldList);
+            },
+            r ->{} //Log.i(TAG, "onCreate: failure" + res.toString())
+        );
+
+
+
+//        void goGetImage(String key){
+//            Amplify.Storage.downloadFile(
+//                    key,
+//                    new File(getApplicationContext().getFilesDir() + "/" + key + ".txt"),
+//                    r -> {
+//                        ImageView i = findViewById(R.id.imageViewDetail);
+//                        i.setImageBitmap(BitmapFactory.decodeFile(r.getFile().getPath()));
+//                    },
+//                    r -> {});
+//        }
+
+
 
 //            TextView taskName = (TextView)findViewById(R.id.textTaskTitle);
 //            taskName.setText("task");
@@ -78,23 +139,6 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
 
-        Amplify.API.query(
-                ModelQuery.list(TeamModel.class),
-                response -> {
-//                    Log.i(TAG, "onCreate: success");
-
-                    for(TeamModel task : response.getData().getItems()) {
-//                        System.out.println(task.getTitle());
-//                        Log.i(TAG, "tasks:" + task.getTitle());
-                        taskModel.add(task);
-                    }
-                },
-                   res ->{} //Log.i(TAG, "onCreate: failure" + res.toString())
-        );
-                    RecyclerView rev = findViewById(R.id.taskDetailRecyclerView);
-                    rev.setLayoutManager(new LinearLayoutManager(this));
-                    rev.setAdapter(new TaskViewAdapter(taskModel, this));
-
 //        Amplify.API.query(
 //                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
 //                r -> {
@@ -108,26 +152,29 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 
     }
 
-    void saveFile(File file, String filename){
-        Amplify.Storage.uploadFile(
-                filename,
-                file,
+    private void goGetImage(TeamModel teamM, int indexOfTeam) {
+        Amplify.Storage.downloadFile(
+                teamM.getId(),
+                new File(getApplicationContext().getFilesDir(), "teamM" + teamM.getId()),
                 r -> {
+                    teamM.bitmap = BitmapFactory.decodeFile(r.getFile().getPath());
+                    Message m = new Message();
+                    m.arg1 = indexOfTeam;
+                    handler.sendMessage(m);
                 },
                 r -> {}
         );
     }
 
-    public void downloadFile(String key){
-        Amplify.Storage.downloadFile(
-                key,
-                new File(getApplicationContext().getFilesDir() + "/" + key + ".txt"),
-                r -> {
-                    ImageView i = findViewById(R.id.imageViewDetail);
-                    i.setImageBitmap(BitmapFactory.decodeFile(r.getFile().getPath()));
-                    },
-                r -> {});
-    }
+//    void saveFile(File file, String filename){
+//        Amplify.Storage.uploadFile(
+//                filename,
+//                file,
+//                r -> {
+//                },
+//                r -> {}
+//        );
+//    }
 
 //    @Override
 //    public void listener(TaskModel taskModel) {
