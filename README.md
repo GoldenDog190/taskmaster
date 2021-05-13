@@ -192,6 +192,8 @@
 
 ### Day 12 - Lab 39 - Review
       * Feature Tasks
-        - 
+        - Tracking Users
+         * Add Analytics to your amplify project.
+         * Create and send an Event whenever you launch intents that start new activities.
       * Screenshots
         -

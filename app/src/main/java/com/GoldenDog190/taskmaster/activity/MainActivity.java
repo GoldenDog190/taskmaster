@@ -23,6 +23,7 @@ import com.GoldenDog190.taskmaster.CognitoSignupActivity;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
             Amplify.configure(getApplicationContext());
             // Log.i(TAG, "configured amplify");
         } catch (AmplifyException e) {
