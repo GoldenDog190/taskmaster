@@ -7,6 +7,7 @@
 * Login, signup, and logout features have been added as well.
 * Can add image to task.
 * Send messages/ notifications from Firebase to app/ emulator.
+* Track users
 
 ## Daily Change Log:
 
@@ -196,4 +197,4 @@
          * Add Analytics to your amplify project.
          * Create and send an Event whenever you launch intents that start new activities.
       * Screenshots
-        -
+        - ![Dashboard screenshot](screenshots/dashboard-screenshot.jpeg)

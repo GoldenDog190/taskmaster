@@ -23,6 +23,7 @@ import com.GoldenDog190.taskmaster.CognitoSignupActivity;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -47,6 +48,8 @@ import java.util.StringJoiner;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
+    private static final String OPENED_EVENT = ;
+    static String OPENED_APP_EVENT = OPENED_EVENT;
     //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
@@ -108,6 +111,17 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //        RecyclerView rv = findViewById(R.id.taskRecycleView);
 //        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
+
+    //====================Analytics & Pinpoint tracking==================================
+        AnalyticsEvent e = AnalyticsEvent.builder()
+                .name(OPENED_APP_EVENT)
+                .addProperty("user", "can add a task")
+                .addProperty("user", "can add a picture")
+                .addProperty("user has lots of tasks", true)
+                .addProperty("Number of users", 1)
+                .build();
+
+        Amplify.Analytics.recordEvent(e);
 
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
