@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,8 +44,11 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
                 .setText(
                         taskModelList.get(position).name + " " + taskModelList.get(position).title + " "
                         + taskModelList.get(position).body + " "
-                        + taskModelList.get(position).assigned + " "
-                                + taskModelList.get(position).s3ImageKey);
+                        + taskModelList.get(position).assigned
+                              + " "  + taskModelList.get(position).s3ImageKey
+                                );
+        ImageView img = holder.itemView.findViewById(R.id.imageViewFragmentDetailPg);
+        img.setImageBitmap(holder.taskModel.bitmap);
 
         holder.itemView.setOnClickListener(v -> {
             clickOnTaskAble.handleClickOnTask(holder);
