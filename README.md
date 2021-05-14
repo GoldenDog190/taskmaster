@@ -7,6 +7,7 @@
 * Login, signup, and logout features have been added as well.
 * Can add image to task.
 * Send messages/ notifications from Firebase to app/ emulator.
+* Track users
 
 ## Daily Change Log:
 
@@ -190,4 +191,10 @@
      * Screenshots
         - ![Sent messages/notifications to the emulator from Firebase](screenshots/firebase-sent-message-to-emulator.jpeg)
 
-
+### Day 12 - Lab 39 - Review
+      * Feature Tasks
+        - Tracking Users
+         * Add Analytics to your amplify project.
+         * Create and send an Event whenever you launch intents that start new activities.
+      * Screenshots
+        - ![ Pinpoint Dashboard Event screenshot](screenshots/dashboard-event-screenshot.jpeg)

@@ -18,11 +18,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.Analytics;
 import com.GoldenDog190.taskmaster.CognitoLoginActivity;
 import com.GoldenDog190.taskmaster.CognitoSignupActivity;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.adapters.TaskViewAdapter;
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
+import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
@@ -40,17 +43,22 @@ import com.google.android.play.core.tasks.Tasks;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringJoiner;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.ClickOnTaskAble {
     public static String TAG = "GoldenDog190.MainActivity";
+
+    static String OPENED_APP_EVENT = "Opened Task Master";
     //    TaskDatabase taskDatabase;
     SharedPreferences preferences;
     public List<TeamModel> taskModel = new ArrayList<>();
     //    public List<Task> task = new ArrayList<>();
     Handler mainThreadHandler;
+
+    Date resumedTime;
 
     //=============Authentication==============================
     void signupCognito() {
@@ -100,6 +108,17 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
+            Amplify.configure(getApplicationContext());
+            // Log.i(TAG, "configured amplify");
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
+
 //        configureAmplify();
         registerWithFirebaseAndPinpoint();
 
@@ -107,6 +126,17 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 //        RecyclerView rv = findViewById(R.id.taskRecycleView);
 //        rv.setLayoutManager(new LinearLayoutManager(this));
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
+
+    //====================Analytics & Pinpoint tracking==================================
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name(OPENED_APP_EVENT)
+                .addProperty("user", "can add a task")
+                .addProperty("user", "can add a picture")
+                .addProperty("user has lots of tasks", true)
+                .addProperty("Number of users", 1)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
 
 
         RecyclerView rv = findViewById(R.id.taskRecycleView);
@@ -138,15 +168,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         };
 
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSS3StoragePlugin());
-            Amplify.configure(getApplicationContext());
-            // Log.i(TAG, "configured amplify");
-        } catch (AmplifyException e) {
-            e.printStackTrace();
-        }
+
 
         //=============Authentication==============================
         // signup
@@ -329,7 +351,14 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         if (teamname != null) taskTeam = String.format(Locale.ENGLISH, "%s Tasks", teamname);
         ((TextView) findViewById(R.id.textViewTasks)).setText(taskTeam);
 
+        resumedTime = new Date();
 
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Analytics.getAnalytics().trackTimeSpentOnPage(resumedTime, new Date(), "MainActivity");
     }
 
 
