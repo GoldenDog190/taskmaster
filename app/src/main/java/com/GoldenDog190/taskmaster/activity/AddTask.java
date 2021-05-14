@@ -119,7 +119,7 @@ public class AddTask extends AppCompatActivity {
 
             String assigned = ((EditText)findViewById(R.id.editTextTextAssigned)).getText().toString();
 //
-            String imageView = String.valueOf(((ImageView) findViewById(R.id.imageViewAdd)));
+//            String imageView = String.valueOf(((ImageView) findViewById(R.id.imageViewAdd)));
 //
 //            String name = ((Spinner)findViewById(R.id.spinner)).getTransitionName().toString();
 
@@ -132,7 +132,7 @@ public class AddTask extends AppCompatActivity {
                     .title(title)
                     .body(body)
                     .assigned(assigned)
-                    .s3ImageKey(imageView)
+//                    .s3ImageKey(imageView)
                     .build();
             Amplify.API.mutate(
                     ModelMutation.create(newTaskModel),
@@ -183,7 +183,7 @@ public class AddTask extends AppCompatActivity {
             intent.putExtra("task", title);
             intent.putExtra("body", body);
             intent.putExtra("assigned", assigned);
-            intent.putExtra("uploadingfile", imageView);
+//            intent.putExtra("uploadingfile", imageView);
             startActivity(intent);
         });
 

@@ -62,7 +62,8 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
             public void handleMessage(Message msg) {
                 if (msg.what == IMAGE_LOADED_MSG) {
                     Log.i(TAG, "handleMessage: " + msg.arg1);
-                    rv.getAdapter().notifyItemChanged(msg.arg1);
+//                    rv.getAdapter().notifyItemChanged(msg.arg1);
+                    rv.getAdapter().notifyDataSetChanged();
                 }
             }
         };
@@ -139,15 +140,15 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
 //        rv.setAdapter(new TaskViewAdapter(taskModel, this));
 
 
-        Amplify.API.query(
-                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
-                r -> {
-                    // Log.i(TAG, r.toString());
-                },
-                r -> {
-                    // Log.i(TAG, "onCreate: " + r.toString());
-                }
-        );
+//        Amplify.API.query(
+//                ModelQuery.list(TeamModel.class, TeamModel.NAME.contains("Team")),
+//                r -> {
+//                    // Log.i(TAG, r.toString());
+//                },
+//                r -> {
+//                    // Log.i(TAG, "onCreate: " + r.toString());
+//                }
+//        );
 
 
     }
@@ -160,6 +161,7 @@ public class TaskDetail extends AppCompatActivity implements TaskViewAdapter.Cli
                     teamM.bitmap = BitmapFactory.decodeFile(r.getFile().getPath());
                     Message m = new Message();
                     m.arg1 = indexOfTeam;
+                    m.what = IMAGE_LOADED_MSG;
                     handler.sendMessage(m);
                 },
                 r -> {}
