@@ -8,6 +8,7 @@
 * Can add image to task.
 * Send messages/ notifications from Firebase to app/ emulator.
 * Track users
+* Add a image from online using an intent filter.
 
 ## Daily Change Log:
 
@@ -201,6 +202,8 @@
 
 ### Day 13 - Lab 41 - Intent Filters
       * Feature Tasks
-        -
+        - Adding a Task from Another Application
+          * Add an intent filter to your application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with, and be taken directly to the Add a Task activity with that image pre-selected.
       * Screenshots
-        - ![](screenshots/.jpeg)
+         - ![[Add A Task Page](screenshots/add-task-version-6.jpeg)
+         - ![Task Detail Page](screenshots/task-detail-version-6.jpeg)
