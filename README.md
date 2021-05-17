@@ -198,3 +198,9 @@
          * Create and send an Event whenever you launch intents that start new activities.
       * Screenshots
         - ![ Pinpoint Dashboard Event screenshot](screenshots/dashboard-event-screenshot.jpeg)
+
+### Day 13 - Lab 41 - Intent Filters
+      * Feature Tasks
+        -
+      * Screenshots
+        - ![](screenshots/.jpeg)
