@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.AmplifyConfig;
 import com.GoldenDog190.taskmaster.Analytics;
 import com.GoldenDog190.taskmaster.CognitoLoginActivity;
 import com.GoldenDog190.taskmaster.CognitoSignupActivity;
@@ -108,16 +109,18 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSS3StoragePlugin());
-            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
-            Amplify.configure(getApplicationContext());
-            // Log.i(TAG, "configured amplify");
-        } catch (AmplifyException e) {
-            e.printStackTrace();
-        }
+        AmplifyConfig.configureAmplify(getApplication(), getApplicationContext());
+
+//        try {
+//            Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+//            Amplify.addPlugin(new AWSS3StoragePlugin());
+//            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
+//            Amplify.configure(getApplicationContext());
+//            // Log.i(TAG, "configured amplify");
+//        } catch (AmplifyException e) {
+//            e.printStackTrace();
+//        }
 
 //        configureAmplify();
         registerWithFirebaseAndPinpoint();

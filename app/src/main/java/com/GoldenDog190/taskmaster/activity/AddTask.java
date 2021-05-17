@@ -9,6 +9,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
@@ -23,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.GoldenDog190.taskmaster.AmplifyConfig;
 import com.GoldenDog190.taskmaster.R;
 import com.GoldenDog190.taskmaster.TaskDatabase;
 import com.GoldenDog190.taskmaster.models.TaskModel;
@@ -56,6 +58,9 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        AmplifyConfig.configureAmplify(getApplication(), getApplicationContext());
+
 // =============Load the database====================
 //        taskDatabase = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "awaggoner_task_master")
 //                .allowMainThreadQueries()
@@ -187,6 +192,32 @@ public class AddTask extends AppCompatActivity {
             startActivity(intent);
         });
 
+        checkDataFromIntentFilter();
+
+    }
+
+    void checkDataFromIntentFilter(){
+        Intent intent = getIntent();
+        if (intent.getType().startsWith("image/")){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                loadImageFromIntentUsingUri(uri);
+            }
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    void loadImageFromIntentUsingUri(Uri uri){
+        fileToUpload = new File(getApplicationContext().getFilesDir(), "uploadingfile");
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            FileUtils.copy(inputStream, new FileOutputStream(fileToUpload));
+
+            ImageView i = findViewById(R.id.imageViewAdd);
+            i.setImageBitmap(BitmapFactory.decodeFile(fileToUpload.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -194,16 +225,8 @@ public class AddTask extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 9){
-            fileToUpload = new File(getApplicationContext().getFilesDir(), "uploadingfile");
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                FileUtils.copy(inputStream, new FileOutputStream(fileToUpload));
+         loadImageFromIntentUsingUri(data.getData());
 
-                ImageView i = findViewById(R.id.imageViewAdd);
-                i.setImageBitmap(BitmapFactory.decodeFile(fileToUpload.getPath()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
