@@ -47,6 +47,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
                         + taskModelList.get(position).body + " "
                         + taskModelList.get(position).assigned
 //                              + " "  + taskModelList.get(position).s3ImageKey
+                                + " "  + taskModelList.get(position).location
                                 );
 //        Log.i( TAG,  taskModelList.get(position).name + " " +
 //                taskModelList.get(position).title + " "

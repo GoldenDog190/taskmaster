@@ -216,4 +216,5 @@
         - Displaying Location
            * On the Task Detail activity, the location of a Task should be displayed if it exists.
       * Screenshots
+        - ![[Add A Task Page](screenshots/add-task-version-location.jpeg)
         - ![Task Detail Page](screenshots/task-detail-location.jpeg)
