@@ -5,6 +5,9 @@ type TeamModel @model {
   body: String
   assigned: String
   s3ImageKey: String
+  location: String
+  latitude: Float
+  longitude: Float
   teamModels: [Task] @connection(keyName: "byTeam", fields : ["id"])
 }
 
@@ -16,6 +19,9 @@ type Task @model
   title: String
   body: String
   assigned: String
+  location: String
+  latitude: Float
+  longitude: Float
   task: TeamModel! @connection(fields: ["teamModelId"])
 }
 

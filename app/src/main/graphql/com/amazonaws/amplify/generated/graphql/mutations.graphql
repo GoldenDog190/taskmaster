@@ -10,6 +10,9 @@ mutation CreateTeamModel(
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -17,6 +20,9 @@ mutation CreateTeamModel(
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -37,6 +43,9 @@ mutation UpdateTeamModel(
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -44,6 +53,9 @@ mutation UpdateTeamModel(
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -64,6 +76,9 @@ mutation DeleteTeamModel(
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -71,6 +86,9 @@ mutation DeleteTeamModel(
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -90,6 +108,9 @@ mutation CreateTask(
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -97,6 +118,9 @@ mutation CreateTask(
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }
@@ -117,6 +141,9 @@ mutation UpdateTask(
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -124,6 +151,9 @@ mutation UpdateTask(
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }
@@ -144,6 +174,9 @@ mutation DeleteTask(
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -151,6 +184,9 @@ mutation DeleteTask(
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }
