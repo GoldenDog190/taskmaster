@@ -207,3 +207,9 @@
       * Screenshots
          - ![[Add A Task Page](screenshots/add-task-version-6.jpeg)
          - ![Task Detail Page](screenshots/task-detail-version-6.jpeg)
+
+### Day 14 - Lab 42 - Location
+      * Feature Tasks
+         - 
+      * Screenshots
+          - ![[](screenshots/.jpeg)
