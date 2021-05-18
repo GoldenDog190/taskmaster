@@ -110,6 +110,18 @@ public class AddTask extends AppCompatActivity {
             intent.setType("*/*");
             startActivityForResult(intent, 9);
 
+//            checkDataFromIntentFilter();
+
+            //==============Intent Filter================
+
+//            Log.i(TAG, "intent :" + intent.getType());
+            if (intent.getType().startsWith("image/")){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                    Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                    loadImageFromIntentUsingUri(uri);
+                }
+            }
+
         });
 
         Button button = findViewById(R.id.TaskButton);
@@ -192,18 +204,19 @@ public class AddTask extends AppCompatActivity {
             startActivity(intent);
         });
 
-        checkDataFromIntentFilter();
+
 
     }
 
     void checkDataFromIntentFilter(){
-        Intent intent = getIntent();
-        if (intent.getType().startsWith("image/")){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-                loadImageFromIntentUsingUri(uri);
-            }
-        }
+//        Intent intent = getIntent();
+//        Log.i(TAG, "intent :" + intent.getType());
+//        if (intent.getType().startsWith("image/")){
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//                Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+//                loadImageFromIntentUsingUri(uri);
+//            }
+//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -212,6 +225,7 @@ public class AddTask extends AppCompatActivity {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             FileUtils.copy(inputStream, new FileOutputStream(fileToUpload));
+
 
             ImageView i = findViewById(R.id.imageViewAdd);
             i.setImageBitmap(BitmapFactory.decodeFile(fileToUpload.getPath()));

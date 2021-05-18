@@ -15,13 +15,7 @@
         <activity android:name=".CognitoSignupActivity" />
         <activity android:name=".CognitoLoginActivity" />
         <activity android:name=".activity.Settings" />
-        <activity android:name=".activity.TaskDetail" >
-            <intent-filter android:label=" share task image">
-                <action android:name="android.intent.action.SEND"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <data android:mimeType="image/*"></data>
-            </intent-filter>
-        </activity>>
+        <activity android:name=".activity.TaskDetail" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -33,7 +27,14 @@
         <activity
             android:name=".activity.AllTasks"
             android:label="@string/title_activity_all_tasks" />
-        <activity android:name=".activity.AddTask" />
+        <activity android:name=".activity.AddTask" >
+            <intent-filter android:label=" share task image">
+                <action android:name="android.intent.action.SEND"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <data android:mimeType="text/plain"></data>
+                <data android:mimeType="image/*"></data>
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
