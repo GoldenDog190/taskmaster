@@ -42,6 +42,7 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -121,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeAds();
 
         requestLocationPermissions();
         loadLocationProviderClientAndGeocoder();
@@ -345,6 +348,13 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
 
     }
+
+    //============Adding Ads===================
+
+    void initializeAds(){
+        MobileAds.initialize(getApplicationContext());
+    }
+
 ///=================Location=====================
     void requestLocationPermissions() {
         requestPermissions(

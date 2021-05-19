@@ -10,6 +10,7 @@
 * Track users
 * Add a image from online using an intent filter.
 * Have a location attached to your task.
+* Added ads to the app.
 
 ## Daily Change Log:
 
@@ -222,6 +223,11 @@
 
 ### Day 15 - Lab 43 - Analytics with Pinpoint
       * Feature Tasks
-        -
+        - Analytics
+         * Using Amplify and Pinpoint, add session analytics to your application.
+         * Using Firebase and AdMob, added an ad to the bottom of the home page.
+       - Stretch Goals
+         * Add analytics for how often users open your Add a Task activity, or how often they open any activity in your application.
       * Screenshots
-        - ![[](screenshots/.jpeg)
+        - ![Dashboard](screenshots/dashboard.jpeg)
+        - ![Home Page](screenshots/home-page-version-with-ads.jpeg)
