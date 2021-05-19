@@ -219,3 +219,9 @@
         - ![[Add A Task Page](screenshots/add-task-version-location.jpeg)
         - ![Task Detail Page](screenshots/task-detail-location.jpeg)
         - ![Home Page](screenshots/home-page-version-location.jpeg)
+
+### Day 15 - Lab 43 - Analytics with Pinpoint
+      * Feature Tasks
+        -
+      * Screenshots
+        - ![[](screenshots/.jpeg)
