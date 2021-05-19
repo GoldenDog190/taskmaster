@@ -25,11 +25,17 @@ public final class Task implements Model {
   public static final QueryField TITLE = field("Task", "title");
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField ASSIGNED = field("Task", "assigned");
+  public static final QueryField LOCATION = field("Task", "location");
+  public static final QueryField LATITUDE = field("Task", "latitude");
+  public static final QueryField LONGITUDE = field("Task", "longitude");
   public static final QueryField TASK = field("Task", "teamModelId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String") String title;
-  private final @ModelField(targetType="String") String body;
-  private final @ModelField(targetType="String") String assigned;
+  public final @ModelField(targetType="String") String title;
+  public final @ModelField(targetType="String") String body;
+  public final @ModelField(targetType="String") String assigned;
+  public final @ModelField(targetType="String") String location;
+  public final @ModelField(targetType="Float") Double latitude;
+  public final @ModelField(targetType="Float") Double longitude;
   private final @ModelField(targetType="TeamModel", isRequired = true) @BelongsTo(targetName = "teamModelId", type = TeamModel.class) TeamModel task;
   public String getId() {
       return id;
@@ -47,15 +53,30 @@ public final class Task implements Model {
       return assigned;
   }
   
+  public String getLocation() {
+      return location;
+  }
+  
+  public Double getLatitude() {
+      return latitude;
+  }
+  
+  public Double getLongitude() {
+      return longitude;
+  }
+  
   public TeamModel getTask() {
       return task;
   }
   
-  private Task(String id, String title, String body, String assigned, TeamModel task) {
+  private Task(String id, String title, String body, String assigned, String location, Double latitude, Double longitude, TeamModel task) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.assigned = assigned;
+    this.location = location;
+    this.latitude = latitude;
+    this.longitude = longitude;
     this.task = task;
   }
   
@@ -71,6 +92,9 @@ public final class Task implements Model {
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getAssigned(), task.getAssigned()) &&
+              ObjectsCompat.equals(getLocation(), task.getLocation()) &&
+              ObjectsCompat.equals(getLatitude(), task.getLatitude()) &&
+              ObjectsCompat.equals(getLongitude(), task.getLongitude()) &&
               ObjectsCompat.equals(getTask(), task.getTask());
       }
   }
@@ -82,6 +106,9 @@ public final class Task implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getAssigned())
+      .append(getLocation())
+      .append(getLatitude())
+      .append(getLongitude())
       .append(getTask())
       .toString()
       .hashCode();
@@ -95,6 +122,9 @@ public final class Task implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("assigned=" + String.valueOf(getAssigned()) + ", ")
+      .append("location=" + String.valueOf(getLocation()) + ", ")
+      .append("latitude=" + String.valueOf(getLatitude()) + ", ")
+      .append("longitude=" + String.valueOf(getLongitude()) + ", ")
       .append("task=" + String.valueOf(getTask()))
       .append("}")
       .toString();
@@ -128,6 +158,9 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
+      null,
+      null,
       null
     );
   }
@@ -137,6 +170,9 @@ public final class Task implements Model {
       title,
       body,
       assigned,
+      location,
+      latitude,
+      longitude,
       task);
   }
   public interface TaskStep {
@@ -150,6 +186,9 @@ public final class Task implements Model {
     BuildStep title(String title);
     BuildStep body(String body);
     BuildStep assigned(String assigned);
+    BuildStep location(String location);
+    BuildStep latitude(Double latitude);
+    BuildStep longitude(Double longitude);
   }
   
 
@@ -159,6 +198,9 @@ public final class Task implements Model {
     private String title;
     private String body;
     private String assigned;
+    private String location;
+    private Double latitude;
+    private Double longitude;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -168,6 +210,9 @@ public final class Task implements Model {
           title,
           body,
           assigned,
+          location,
+          latitude,
+          longitude,
           task);
     }
     
@@ -196,6 +241,24 @@ public final class Task implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep location(String location) {
+        this.location = location;
+        return this;
+    }
+    
+    @Override
+     public BuildStep latitude(Double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+    
+    @Override
+     public BuildStep longitude(Double longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -219,12 +282,15 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String assigned, TeamModel task) {
+    private CopyOfBuilder(String id, String title, String body, String assigned, String location, Double latitude, Double longitude, TeamModel task) {
       super.id(id);
       super.task(task)
         .title(title)
         .body(body)
-        .assigned(assigned);
+        .assigned(assigned)
+        .location(location)
+        .latitude(latitude)
+        .longitude(longitude);
     }
     
     @Override
@@ -245,6 +311,21 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder assigned(String assigned) {
       return (CopyOfBuilder) super.assigned(assigned);
+    }
+    
+    @Override
+     public CopyOfBuilder location(String location) {
+      return (CopyOfBuilder) super.location(location);
+    }
+    
+    @Override
+     public CopyOfBuilder latitude(Double latitude) {
+      return (CopyOfBuilder) super.latitude(latitude);
+    }
+    
+    @Override
+     public CopyOfBuilder longitude(Double longitude) {
+      return (CopyOfBuilder) super.longitude(longitude);
     }
   }
   

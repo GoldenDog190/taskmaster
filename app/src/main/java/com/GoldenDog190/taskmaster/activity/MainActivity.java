@@ -3,11 +3,16 @@ package com.GoldenDog190.taskmaster.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,12 +42,18 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.tasks.Tasks;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     Handler mainThreadHandler;
 
     Date resumedTime;
+    FusedLocationProviderClient locationProviderClient;
+    Geocoder geocoder;
 
     //=============Authentication==============================
     void signupCognito() {
@@ -108,6 +121,10 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestLocationPermissions();
+        loadLocationProviderClientAndGeocoder();
+        getCurrentLocation();
 
         AmplifyConfig.configureAmplify(getApplication(), getApplicationContext());
 
@@ -328,6 +345,69 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
 
     }
+///=================Location=====================
+    void requestLocationPermissions() {
+        requestPermissions(
+                new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                },
+                1
+        );
+    }
+
+    void loadLocationProviderClientAndGeocoder() {
+        locationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+    }
+
+    void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
+            @Override
+            public boolean isCancellationRequested() {
+                return false;
+            }
+
+            @NonNull
+            @Override
+            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                return null;
+            }
+        })
+                .addOnCompleteListener(data -> {
+                    Log.i(TAG, "onComplete: " + data.toString());
+                })
+                .addOnSuccessListener(location -> {
+                    if (location != null){
+                        Log.i(TAG, "onSuccess: " + location.toString());
+
+                        try {
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),5);
+                            Log.i(TAG, "getCurrentLocation: addresses" + addresses.toString());
+                            String streetAddress = addresses.get(0).getAddressLine(0);
+                            ((TextView) findViewById(R.id.textViewTaskItem)).setText(streetAddress);
+                            Log.i(TAG, "getCurrentLocation: " + streetAddress);
+                        } catch (IOException e) {
+                            Log.e(TAG, "getCurrentLocation: failed");
+                            e.printStackTrace();
+                        }
+
+                    }
+                })
+                .addOnCanceledListener(() -> Log.i(TAG, "onCanceled: it was canceled"))
+                .addOnFailureListener(error -> Log.i(TAG, "onFailure: " + error.toString()));
+    };
 
 
     @Override

@@ -7,6 +7,9 @@ subscription OnCreateTeamModel {
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -14,6 +17,9 @@ subscription OnCreateTeamModel {
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -31,6 +37,9 @@ subscription OnUpdateTeamModel {
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -38,6 +47,9 @@ subscription OnUpdateTeamModel {
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -55,6 +67,9 @@ subscription OnDeleteTeamModel {
     body
     assigned
     s3ImageKey
+    location
+    latitude
+    longitude
     teamModels {
       items {
         id
@@ -62,6 +77,9 @@ subscription OnDeleteTeamModel {
         title
         body
         assigned
+        location
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -78,6 +96,9 @@ subscription OnCreateTask {
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -85,6 +106,9 @@ subscription OnCreateTask {
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }
@@ -102,6 +126,9 @@ subscription OnUpdateTask {
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -109,6 +136,9 @@ subscription OnUpdateTask {
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }
@@ -126,6 +156,9 @@ subscription OnDeleteTask {
     title
     body
     assigned
+    location
+    latitude
+    longitude
     task {
       id
       name
@@ -133,6 +166,9 @@ subscription OnDeleteTask {
       body
       assigned
       s3ImageKey
+      location
+      latitude
+      longitude
       teamModels {
         nextToken
       }

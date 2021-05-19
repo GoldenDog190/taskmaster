@@ -9,6 +9,7 @@
 * Send messages/ notifications from Firebase to app/ emulator.
 * Track users
 * Add a image from online using an intent filter.
+* Have a location attached to your task.
 
 ## Daily Change Log:
 
@@ -207,3 +208,14 @@
       * Screenshots
          - ![[Add A Task Page](screenshots/add-task-version-6.jpeg)
          - ![Task Detail Page](screenshots/task-detail-version-6.jpeg)
+
+### Day 14 - Lab 42 - Location
+      * Feature Tasks
+        - Location
+           * When the user adds a task, their location should be retrieved and included as part of the saved Task.
+        - Displaying Location
+           * On the Task Detail activity, the location of a Task should be displayed if it exists.
+      * Screenshots
+        - ![[Add A Task Page](screenshots/add-task-version-location.jpeg)
+        - ![Task Detail Page](screenshots/task-detail-location.jpeg)
+        - ![Home Page](screenshots/home-page-version-location.jpeg)
