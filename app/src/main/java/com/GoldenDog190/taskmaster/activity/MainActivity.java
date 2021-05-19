@@ -42,6 +42,8 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     Date resumedTime;
     FusedLocationProviderClient locationProviderClient;
     Geocoder geocoder;
+    private Object AdView;
+//     private AdView loadAd;
 
     //=============Authentication==============================
     void signupCognito() {
@@ -353,6 +357,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
     void initializeAds(){
         MobileAds.initialize(getApplicationContext());
+        AdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+//        AdView.loadAd(adRequest);
     }
 
 ///=================Location=====================
