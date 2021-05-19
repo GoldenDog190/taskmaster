@@ -71,9 +71,9 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        requestLocationPermissions();
-        loadLocationProviderClientAndGeocoder();
-        getCurrentLocation();
+//        requestLocationPermissions();
+//        loadLocationProviderClientAndGeocoder();
+//        getCurrentLocation();
 
         AmplifyConfig.configureAmplify(getApplication(), getApplicationContext());
 
@@ -157,7 +157,7 @@ public class AddTask extends AppCompatActivity {
 //
 //            String name = ((Spinner)findViewById(R.id.spinner)).getTransitionName().toString();
 
-//            String location = ((EditText)findViewById(R.id.)).getText().toString();
+            String location = ((EditText)findViewById(R.id.editTextTextLocation)).getText().toString();
 
 //  Spinner teamspinner = findViewById(R.id.spinner);
 //            String selectedTeam = teamspinner.getSelectedItem().toString();
@@ -169,7 +169,7 @@ public class AddTask extends AppCompatActivity {
                     .body(body)
                     .assigned(assigned)
 //                    .s3ImageKey(imageView)
-//                    .location(location)
+                    .location(location)
                     .build();
             Amplify.API.mutate(
                     ModelMutation.create(newTaskModel),
@@ -221,7 +221,7 @@ public class AddTask extends AppCompatActivity {
             intent.putExtra("body", body);
             intent.putExtra("assigned", assigned);
 //            intent.putExtra("uploadingfile", imageView);
-//            intent.putExtra("location", location);
+            intent.putExtra("location", location);
             startActivity(intent);
         });
 
@@ -230,66 +230,66 @@ public class AddTask extends AppCompatActivity {
 
     //======================Location==========================
 
-    void requestLocationPermissions() {
-        requestPermissions(
-                new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                },
-                1
-        );
-    }
-
-    void loadLocationProviderClientAndGeocoder() {
-        locationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
-        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-    }
-
-    void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
-            @Override
-            public boolean isCancellationRequested() {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
-                return null;
-            }
-        })
-                .addOnCompleteListener(data -> {
-                    Log.i(TAG, "onComplete: " + data.toString());
-                })
-                .addOnSuccessListener(location -> {
-                    if (location != null){
-                        Log.i(TAG, "onSuccess: " + location.toString());
-
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),5);
-                            Log.i(TAG, "getCurrentLocation: addresses" + addresses.toString());
-                            String streetAddress = addresses.get(0).getAddressLine(0);
-                            Log.i(TAG, "getCurrentLocation: " + streetAddress);
-                        } catch (IOException e) {
-                            Log.e(TAG, "getCurrentLocation: failed");
-                            e.printStackTrace();
-                        }
-
-                    }
-                })
-                .addOnCanceledListener(() -> Log.i(TAG, "onCanceled: it was canceled"))
-                .addOnFailureListener(error -> Log.i(TAG, "onFailure: " + error.toString()));
-    };
+//    void requestLocationPermissions() {
+//        requestPermissions(
+//                new String[]{
+//                        Manifest.permission.ACCESS_FINE_LOCATION,
+//                        Manifest.permission.ACCESS_COARSE_LOCATION
+//                },
+//                1
+//        );
+//    }
+//
+//    void loadLocationProviderClientAndGeocoder() {
+//        locationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+//        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+//    }
+//
+//    void getCurrentLocation() {
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+//        locationProviderClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
+//            @Override
+//            public boolean isCancellationRequested() {
+//                return false;
+//            }
+//
+//            @NonNull
+//            @Override
+//            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+//                return null;
+//            }
+//        })
+//                .addOnCompleteListener(data -> {
+//                    Log.i(TAG, "onComplete: " + data.toString());
+//                })
+//                .addOnSuccessListener(location -> {
+//                    if (location != null){
+//                        Log.i(TAG, "onSuccess: " + location.toString());
+//
+//                        try {
+//                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),5);
+//                            Log.i(TAG, "getCurrentLocation: addresses" + addresses.toString());
+//                            String streetAddress = addresses.get(0).getAddressLine(0);
+//                            Log.i(TAG, "getCurrentLocation: " + streetAddress);
+//                        } catch (IOException e) {
+//                            Log.e(TAG, "getCurrentLocation: failed");
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                })
+//                .addOnCanceledListener(() -> Log.i(TAG, "onCanceled: it was canceled"))
+//                .addOnFailureListener(error -> Log.i(TAG, "onFailure: " + error.toString()));
+//    };
 
     //===========Intent Filter===========================
 

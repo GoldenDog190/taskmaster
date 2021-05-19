@@ -48,6 +48,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
                         + taskModelList.get(position).assigned
 //                              + " "  + taskModelList.get(position).s3ImageKey
                                 + " "  + taskModelList.get(position).location
+
                                 );
 //        Log.i( TAG,  taskModelList.get(position).name + " " +
 //                taskModelList.get(position).title + " "
@@ -57,6 +58,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskMo
         ImageView img = holder.itemView.findViewById(R.id.imageViewFragmentDetailPg);
         img.setImageBitmap(holder.taskModel.bitmap);
 //        Log.i(TAG,holder.taskModel.bitmap + " ");
+
+        TextView location = holder.itemView.findViewById(R.id.textViewLocationNow);
+        location.setText(holder.taskModel.location);
 
         holder.itemView.setOnClickListener(v -> {
             clickOnTaskAble.handleClickOnTask(holder);

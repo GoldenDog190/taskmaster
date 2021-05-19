@@ -29,7 +29,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextTaskDescription"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextTaskDescription"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTextTaskDescription"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -37,7 +37,7 @@
         android:id="@+id/editTextTextTaskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/description"
@@ -51,10 +51,10 @@
         android:id="@+id/TaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="132dp"
         android:text="@string/add_task"
         app:layout_constraintEnd_toEndOf="@+id/buttonAddImage"
-        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/buttonAddImage"
         app:layout_constraintTop_toTopOf="@+id/spinner" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/editTextTextAssigned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/assigned"
@@ -86,21 +86,22 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextAssigned" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextLocation" />
 
     <ImageView
         android:id="@+id/imageViewAdd"
         android:layout_width="95dp"
         android:layout_height="79dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/tempimg"
         app:layout_constraintBottom_toTopOf="@+id/TaskButton"
         app:layout_constraintEnd_toStartOf="@+id/TaskButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/picture_frame" />
 
@@ -108,10 +109,24 @@
         android:id="@+id/buttonAddImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="56dp"
         android:text="@string/upload_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/editTextTextLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/location"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextAssigned"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextAssigned"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextAssigned" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
