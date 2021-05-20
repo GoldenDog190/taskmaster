@@ -42,6 +42,9 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TeamModel;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     Date resumedTime;
     FusedLocationProviderClient locationProviderClient;
     Geocoder geocoder;
+    private AdView mAdView;
+
 
     //=============Authentication==============================
     void signupCognito() {
@@ -122,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initializeAds();
+
         requestLocationPermissions();
         loadLocationProviderClientAndGeocoder();
         getCurrentLocation();
@@ -168,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         rv.setLayoutManager(new LinearLayoutManager(this));
 
 
-// AWS Amplify
+// AWS Amplify======================================
 
         mainThreadHandler = new Handler(this.getMainLooper()) {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -345,6 +352,16 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
 
     }
+
+    //============Adding Ads===================
+
+    void initializeAds(){
+        MobileAds.initialize(getApplicationContext());
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
 ///=================Location=====================
     void requestLocationPermissions() {
         requestPermissions(
