@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
     Date resumedTime;
     FusedLocationProviderClient locationProviderClient;
     Geocoder geocoder;
-    private Object AdView;
-//     private AdView loadAd;
+    private AdView mAdView;
+
 
     //=============Authentication==============================
     void signupCognito() {
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
         rv.setLayoutManager(new LinearLayoutManager(this));
 
 
-// AWS Amplify
+// AWS Amplify======================================
 
         mainThreadHandler = new Handler(this.getMainLooper()) {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -357,9 +357,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.C
 
     void initializeAds(){
         MobileAds.initialize(getApplicationContext());
-        AdView = findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-//        AdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);
     }
 
 ///=================Location=====================

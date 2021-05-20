@@ -229,5 +229,5 @@
        - Stretch Goals
          * Add analytics for how often users open your Add a Task activity, or how often they open any activity in your application.
       * Screenshots
-        - ![Dashboard](screenshots/dashboard.jpeg)
+        - ![Firebase Dashboard](screenshots/firebase-dashboard-with-ad.jpeg)
         - ![Home Page](screenshots/home-page-version-with-ads.jpeg)
